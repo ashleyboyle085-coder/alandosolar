@@ -3,338 +3,462 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Alan Renewable Energy Solutions | Solar Power Lagos</title>
+<title>Alan Renewable Energy Solutions | Solar Power Nigeria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0A0B0E;--bg2:#111318;--bg3:#181C22;
-  --gold:#F0A500;--gold2:#FFB830;--gold-dim:rgba(240,165,0,.12);
-  --white:#fff;--mist:#8B95A8;--radius:12px;--rXL:22px;
+  --sky1:#EBF5FF;
+  --sky2:#D6ECFF;
+  --sky3:#C0E0FF;
+  --sky4:#87CEEB;
+  --skyDark:#5BB3E0;
+  --ink:#0A1929;
+  --ink2:#0D2540;
+  --gold:#D4860A;
+  --gold2:#F0A500;
+  --goldbg:rgba(212,134,10,.1);
+  --white:#fff;
+  --mist:#5C7A96;
+  --card:#fff;
+  --border:rgba(10,25,41,.08);
+  --shadow:0 4px 28px rgba(10,25,41,.09);
+  --shadow2:0 12px 52px rgba(10,25,41,.14);
   --ease:cubic-bezier(.16,1,.3,1);
+  --r:14px;--rXL:24px;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--sky1);color:var(--ink);overflow-x:hidden}
 img{display:block;width:100%;height:100%;object-fit:cover}
 a{text-decoration:none;color:inherit}
-/* ---------- PROGRESS BAR ---------- */
-#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:9999;width:0;transition:width .1s linear}
-/* ---------- UTILS ---------- */
-.c{width:min(1160px,92%);margin:0 auto}
-.serif{font-family:'Playfair Display',serif}
-.gold{color:var(--gold)}
-/* reveal */
-.r{opacity:0;transform:translateY(44px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.rl{opacity:0;transform:translateX(-44px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.rr{opacity:0;transform:translateX(44px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+
+/* ---- PROGRESS BAR ---- */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--skyDark),var(--gold2),var(--skyDark));background-size:200%;animation:pgbar 2s linear infinite;z-index:9999;width:0;transition:width .12s linear}
+@keyframes pgbar{0%{background-position:0%}100%{background-position:200%}}
+
+/* ---- FLOATING CLOUDS ---- */
+.clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:100px;background:rgba(255,255,255,.45);filter:blur(2px);animation:cloudDrift linear infinite}
+@keyframes cloudDrift{from{transform:translateX(-120%)}to{transform:translateX(110vw)}}
+
+/* ---- UTILS ---- */
+.c{width:min(1160px,92%);margin:0 auto;position:relative;z-index:1}
+.lbl{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.lbl::before{content:'';width:26px;height:1.5px;background:var(--gold)}
+.h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;color:var(--ink)}
+.h2 em{color:var(--gold);font-style:italic}
+/* reveals */
+.r{opacity:0;transform:translateY(44px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rl{opacity:0;transform:translateX(-44px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rr{opacity:0;transform:translateX(44px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rs{opacity:0;transform:scale(.92);transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .in{opacity:1!important;transform:none!important}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 .d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:7px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.03em;transition:all .4s var(--ease);position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-105%);transition:.4s var(--ease)}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.02em;transition:all .4s var(--ease);position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.2);transform:translateX(-105%);transition:.4s var(--ease)}
 .btn:hover::after{transform:none}
-.btn-gold{background:var(--gold);color:var(--bg)}
-.btn-gold:hover{box-shadow:0 0 40px rgba(240,165,0,.45);transform:translateY(-2px)}
-.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.22);color:var(--white)}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-/* section label */
-.lbl{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.lbl::before{content:'';width:28px;height:1px;background:var(--gold)}
-/* headings */
-.h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.3rem);font-weight:700;line-height:1.15}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold2);box-shadow:0 8px 32px rgba(212,134,10,.38);transform:translateY(-3px)}
+.btn-sky{background:var(--skyDark);color:#fff}
+.btn-sky:hover{background:var(--sky4);box-shadow:0 8px 32px rgba(91,179,224,.38);transform:translateY(-3px)}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1fbd5c;box-shadow:0 8px 32px rgba(37,211,102,.4);transform:translateY(-3px)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--ink2);transform:translateY(-3px);box-shadow:var(--shadow2)}
+.btn-out{background:transparent;border:2px solid var(--border);color:var(--ink)}
+.btn-out:hover{border-color:var(--skyDark);color:var(--skyDark)}
 
-/* ========== NAVBAR ========== */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 0;transition:all .4s var(--ease)}
-nav.s{background:rgba(10,11,14,.92);backdrop-filter:blur(20px);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+/* ======== NAVBAR ======== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all .4s var(--ease)}
+nav.s{background:rgba(235,245,255,.94);backdrop-filter:blur(20px);padding:13px 0;border-bottom:1px solid var(--border);box-shadow:0 2px 24px rgba(10,25,41,.06)}
 .ni{display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem}
-.lm{width:40px;height:40px;border-radius:8px;background:var(--gold);display:grid;place-items:center}
-.lm svg{width:22px;height:22px;color:var(--bg)}
-.ls{display:block;font-family:'DM Sans',sans-serif;font-weight:400;font-size:.62rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase;margin-top:1px}
-.nls{display:flex;align-items:center;gap:32px;list-style:none}
-.nls a{font-size:.86rem;font-weight:500;color:rgba(255,255,255,.65);position:relative;transition:.3s}
-.nls a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:.35s var(--ease)}
-.nls a:hover{color:var(--white)}.nls a:hover::after{width:100%}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',serif;font-weight:700;font-size:1.06rem;color:var(--ink)}
+.lm{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--skyDark),var(--ink2));display:grid;place-items:center;flex-shrink:0;animation:logoSpin 8s linear infinite}
+@keyframes logoSpin{0%,100%{box-shadow:0 0 0 0 rgba(91,179,224,.4)}50%{box-shadow:0 0 0 8px rgba(91,179,224,.0)}}
+.lm svg{width:22px;height:22px;color:var(--gold2);animation:sunRay 4s ease-in-out infinite}
+@keyframes sunRay{0%,100%{transform:rotate(0deg)}50%{transform:rotate(15deg)}}
+.ls{display:block;font-family:'DM Sans',sans-serif;font-weight:400;font-size:.6rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.nls{display:flex;align-items:center;gap:30px;list-style:none}
+.nls a{font-size:.85rem;font-weight:500;color:var(--mist);position:relative;transition:.3s}
+.nls a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--skyDark);transition:.35s var(--ease)}
+.nls a:hover{color:var(--ink)}.nls a:hover::after{width:100%}
 .hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.hbg span{width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:.3s var(--ease)}
-.mob{display:none;flex-direction:column;background:rgba(10,11,14,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05)}
+.hbg span{width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:.3s}
+.mob{display:none;flex-direction:column;background:rgba(235,245,255,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border)}
 .mob.o{display:flex}
-.mob a{padding:13px 24px;color:rgba(255,255,255,.7);font-size:.92rem;border-bottom:1px solid rgba(255,255,255,.04);transition:.3s}
-.mob a:hover{color:var(--gold);padding-left:32px}
+.mob a{padding:13px 24px;color:var(--mist);font-size:.92rem;border-bottom:1px solid var(--border);transition:.3s}
+.mob a:hover{color:var(--skyDark);padding-left:32px}
 
-/* ========== HERO ========== */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.hbg-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=85')center/cover;opacity:.38;animation:hzoom 14s ease-in-out infinite alternate}
-@keyframes hzoom{from{transform:scale(1.04)}to{transform:scale(1.1) translateX(-1%)}}
-.hgrad{position:absolute;inset:0;background:linear-gradient(120deg,rgba(10,11,14,.95) 0%,rgba(10,11,14,.6) 55%,rgba(10,11,14,.3) 100%)}
-.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.03)1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.03)1px,transparent 1px);background-size:70px 70px;animation:gd 18s linear infinite}
-@keyframes gd{from{background-position:0 0}to{background-position:70px 70px}}
-#pts{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.pt{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:pr var(--d,7s) var(--dl,0s) ease-in infinite}
-@keyframes pr{0%{transform:translateY(0) scale(0);opacity:0}15%{opacity:.5}100%{transform:translateY(-110vh) scale(.2);opacity:0}}
-.hcont{position:relative;z-index:2;flex:1;display:flex;align-items:center;padding:130px 0 100px}
-.hinner{max-width:820px}
-.hbadge{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
-.hbadge::before{content:'';width:0;height:1px;background:var(--gold);animation:lx 1s .3s var(--ease) forwards}
-@keyframes lx{to{width:36px}}
+/* ======== HERO ======== */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(160deg,var(--sky1) 0%,var(--sky2) 40%,var(--sky3) 100%)}
+/* Animated sun */
+.hsun{position:absolute;right:8%;top:12%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(240,165,0,.35) 0%,rgba(240,165,0,.1) 50%,transparent 70%);animation:sunPulse 4s ease-in-out infinite}
+.hsun-core{position:absolute;right:8%;top:12%;width:280px;height:280px;border-radius:50%;display:grid;place-items:center}
+.hsun-inner{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,#FFD166,#F0A500);box-shadow:0 0 60px rgba(240,165,0,.5),0 0 120px rgba(240,165,0,.2);animation:sunGlow 3s ease-in-out infinite}
+@keyframes sunPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:1}}
+@keyframes sunGlow{0%,100%{box-shadow:0 0 60px rgba(240,165,0,.5),0 0 120px rgba(240,165,0,.2)}50%{box-shadow:0 0 90px rgba(240,165,0,.7),0 0 180px rgba(240,165,0,.3)}}
+/* Sun rays */
+.srays{position:absolute;right:calc(8% + 100px);top:calc(12% + 100px);width:0;height:0}
+.sray{position:absolute;width:120px;height:2px;background:linear-gradient(to right,rgba(240,165,0,.4),transparent);transform-origin:left center;animation:rayPulse 3s ease-in-out infinite}
+.sray:nth-child(1){transform:rotate(0deg);animation-delay:0s}
+.sray:nth-child(2){transform:rotate(45deg);animation-delay:.2s}
+.sray:nth-child(3){transform:rotate(90deg);animation-delay:.4s}
+.sray:nth-child(4){transform:rotate(135deg);animation-delay:.6s}
+.sray:nth-child(5){transform:rotate(180deg);animation-delay:.8s}
+.sray:nth-child(6){transform:rotate(225deg);animation-delay:1s}
+.sray:nth-child(7){transform:rotate(270deg);animation-delay:1.2s}
+.sray:nth-child(8){transform:rotate(315deg);animation-delay:1.4s}
+@keyframes rayPulse{0%,100%{opacity:.3;width:80px}50%{opacity:.8;width:140px}}
+/* Sky birds */
+.birds{position:absolute;inset:0;pointer-events:none}
+.bird{position:absolute;animation:birdFly linear infinite}
+@keyframes birdFly{from{transform:translateX(-60px)}to{transform:translateX(110vw)}}
+.bird svg{animation:birdFlap .5s ease-in-out infinite alternate}
+@keyframes birdFlap{from{transform:scaleY(1)}to{transform:scaleY(.4)}}
+/* Floating solar panels */
+.fpanels{position:absolute;right:3%;bottom:18%;opacity:.12;animation:panelFloat 6s ease-in-out infinite}
+@keyframes panelFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-20px) rotate(2deg)}}
+.hbg-photo{position:absolute;right:0;top:0;width:52%;height:100%;overflow:hidden;clip-path:polygon(15% 0%,100% 0%,100% 100%,0% 100%)}
+.hbg-photo img{width:100%;height:100%;opacity:.55;transition:transform 20s ease}
+.hbg-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--sky2) 0%,transparent 40%)}
+.hcont{position:relative;z-index:2;flex:1;display:flex;align-items:center;padding:130px 0 80px}
+.hinner{max-width:660px}
+.hbadge{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;background:var(--goldbg);padding:7px 16px;border-radius:100px;border:1px solid rgba(212,134,10,.18);animation:badgePop .6s .2s var(--ease) both}
+@keyframes badgePop{from{opacity:0;transform:scale(.85) translateY(10px)}to{opacity:1;transform:none}}
 .hbadge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-h1.ht{font-family:'Playfair Display',serif;font-size:clamp(3rem,6.5vw,5.4rem);font-weight:900;line-height:1.07;letter-spacing:-.02em}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+h1.ht{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.8vw,5rem);font-weight:900;line-height:1.07;letter-spacing:-.02em;color:var(--ink)}
 h1.ht .hl{display:block;overflow:hidden}
 h1.ht .hl span{display:block;animation:su .9s var(--ease) both}
-h1.ht .hl:nth-child(1) span{animation-delay:.3s}
-h1.ht .hl:nth-child(2) span{animation-delay:.45s}
-h1.ht .hl:nth-child(3) span{animation-delay:.6s;color:var(--gold)}
+h1.ht .hl:nth-child(1) span{animation-delay:.35s}
+h1.ht .hl:nth-child(2) span{animation-delay:.5s}
+h1.ht .hl:nth-child(3) span{animation-delay:.65s;color:var(--skyDark);font-style:italic}
 @keyframes su{from{transform:translateY(110%);opacity:0}to{transform:none;opacity:1}}
-.hsub{margin-top:22px;font-size:1.05rem;line-height:1.75;color:rgba(255,255,255,.6);max-width:540px;animation:fi .8s .9s var(--ease) both}
-.hbtns{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;animation:fi .8s 1.1s var(--ease) both}
+.hsub{margin-top:20px;font-size:1.05rem;line-height:1.8;color:var(--mist);max-width:520px;animation:fi .8s .95s var(--ease) both}
+.hbtns{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;animation:fi .8s 1.1s var(--ease) both}
 @keyframes fi{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-/* hero stats bar */
-.hstats{position:relative;z-index:2;display:flex;border-top:1px solid rgba(255,255,255,.06);animation:fi .8s 1.3s var(--ease) both}
-.hst{flex:1;padding:22px 32px;background:rgba(255,255,255,.03);border-left:1px solid rgba(255,255,255,.04);backdrop-filter:blur(8px);transition:.4s var(--ease)}
-.hst:hover{background:var(--gold-dim);border-left-color:rgba(240,165,0,.15)}
+/* floating hero photo card */
+.hphoto-card{position:absolute;right:54%;top:50%;transform:translate(50%,-50%);width:min(440px,46vw);animation:cardFloat 6s ease-in-out infinite;display:none}
+@keyframes cardFloat{0%,100%{transform:translate(50%,-50%) translateY(0)}50%{transform:translate(50%,-50%) translateY(-18px)}}
+/* Hero stats strip */
+.hstats{position:relative;z-index:2;display:flex;background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border-top:1px solid var(--border)}
+.hst{flex:1;padding:22px 28px;border-left:1px solid var(--border);transition:.4s var(--ease);position:relative;overflow:hidden}
 .hst:first-child{border-left:none}
-.hst-v{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--gold)}
-.hst-l{font-size:.75rem;color:var(--mist);margin-top:3px;letter-spacing:.04em}
-/* scroll indicator */
-.hscroll{position:absolute;bottom:140px;right:40px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px}
-.hscroll span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);writing-mode:vertical-rl}
-.hsl{width:1px;height:50px;background:linear-gradient(var(--gold),transparent);animation:sp 2s ease-in-out infinite}
-@keyframes sp{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.6)}}
+.hst::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--skyDark),var(--gold2));transform:scaleX(0);transform-origin:left;transition:.5s var(--ease)}
+.hst:hover::before{transform:scaleX(1)}
+.hst:hover{background:rgba(91,179,224,.06)}
+.hst-v{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:var(--skyDark)}
+.hst-l{font-size:.72rem;color:var(--mist);margin-top:3px;letter-spacing:.04em}
+/* scroll hint */
+.hscroll{position:absolute;bottom:110px;left:40px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hscroll span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);writing-mode:vertical-rl}
+.hsl{width:1px;height:48px;background:linear-gradient(var(--skyDark),transparent);animation:sp 2s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ========== MARQUEE ========== */
-.mq{background:var(--gold);padding:13px 0;overflow:hidden}
-.mqt{display:flex;width:max-content;animation:mq 22s linear infinite}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.mqi{display:flex;align-items:center;gap:18px;padding:0 36px;white-space:nowrap;font-family:'Playfair Display',serif;font-weight:700;font-size:.92rem;color:var(--bg)}
-.mqi .sep{width:4px;height:4px;border-radius:50%;background:var(--bg);opacity:.35}
+/* ======== MARQUEE ======== */
+.mq{background:var(--ink);padding:14px 0;overflow:hidden}
+.mqt{display:flex;width:max-content;animation:mqa 22s linear infinite}
+@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mqi{display:flex;align-items:center;gap:18px;padding:0 36px;white-space:nowrap;font-family:'Playfair Display',serif;font-weight:700;font-size:.9rem;color:var(--sky4)}
+.mqi .sp{width:4px;height:4px;border-radius:50%;background:var(--gold2);opacity:.5}
 
-/* ========== ABOUT ========== */
-.about{padding:120px 0;background:var(--bg)}
+/* ======== ABOUT ======== */
+.about{padding:120px 0;background:var(--sky1);position:relative;overflow:hidden}
+.about::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(91,179,224,.12),transparent 70%);pointer-events:none}
 .abg{display:grid;grid-template-columns:1fr 1.08fr;gap:80px;align-items:center}
-.abimg{position:relative;height:540px}
-.abm{width:100%;height:100%;border-radius:var(--rXL);overflow:hidden}
+.abimg{position:relative;height:560px}
+.abm{width:100%;height:100%;border-radius:var(--rXL);overflow:hidden;box-shadow:var(--shadow2)}
 .abm img{transition:transform .8s var(--ease)}
 .abm:hover img{transform:scale(1.04)}
-.abf{position:absolute;bottom:-28px;right:-28px;width:190px;height:190px;border-radius:var(--rXL);overflow:hidden;border:4px solid var(--bg);box-shadow:0 20px 56px rgba(0,0,0,.5)}
-.abadge{position:absolute;top:28px;left:-20px;background:var(--gold);color:var(--bg);padding:20px 24px;border-radius:var(--radius);box-shadow:0 16px 48px rgba(240,165,0,.3)}
-.abadge .n{font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;line-height:1}
-.abadge .t{font-size:.72rem;font-weight:600;margin-top:4px;opacity:.75}
-.abt p{color:rgba(255,255,255,.55);line-height:1.85;font-size:.97rem;margin-bottom:14px}
+.abf{position:absolute;bottom:-28px;right:-28px;width:185px;height:185px;border-radius:var(--rXL);overflow:hidden;border:4px solid var(--sky1);box-shadow:var(--shadow2);animation:imgFloat 5s ease-in-out infinite}
+@keyframes imgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.abadge{position:absolute;top:28px;left:-20px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;padding:20px 24px;border-radius:var(--r);box-shadow:0 12px 40px rgba(212,134,10,.35);animation:badgeFloat 4s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(2deg) translateY(-8px)}}
+.abadge .n{font-family:'Playfair Display',serif;font-weight:900;font-size:2.1rem;line-height:1}
+.abadge .t{font-size:.7rem;font-weight:600;margin-top:4px;opacity:.9}
+/* extra floating mini image */
+.ab-mini{position:absolute;top:50%;right:-40px;transform:translateY(-50%);width:110px;height:110px;border-radius:50%;overflow:hidden;border:4px solid var(--sky1);box-shadow:var(--shadow2);animation:miniFloat 7s ease-in-out infinite .5s}
+@keyframes miniFloat{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 14px))}}
+.abt p{color:var(--mist);line-height:1.85;font-size:.97rem;margin-bottom:14px}
 .perks{display:flex;flex-direction:column;gap:12px;margin:26px 0 34px}
-.pk{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:var(--radius);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:.35s var(--ease)}
-.pk:hover{background:var(--gold-dim);border-color:rgba(240,165,0,.18);transform:translateX(6px)}
-.pki{width:36px;height:36px;border-radius:8px;background:var(--gold-dim);display:grid;place-items:center;flex-shrink:0}
+.pk{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:var(--r);background:var(--sky2);border:1px solid var(--sky3);transition:.35s var(--ease)}
+.pk:hover{background:var(--goldbg);border-color:rgba(212,134,10,.2);transform:translateX(6px)}
+.pki{width:36px;height:36px;border-radius:8px;background:var(--goldbg);display:grid;place-items:center;flex-shrink:0;transition:.35s var(--ease)}
+.pk:hover .pki{background:rgba(212,134,10,.18);transform:rotate(-8deg)}
 .pki svg{width:18px;height:18px;color:var(--gold)}
-.pk h4{font-weight:600;font-size:.9rem;margin-bottom:3px}
+.pk h4{font-weight:600;font-size:.9rem;margin-bottom:3px;color:var(--ink)}
 .pk p{color:var(--mist);font-size:.82rem;margin:0}
 
-/* ========== SERVICES ========== */
-.services{padding:120px 0;background:var(--bg2)}
-.sh{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:60px}
-.sh p{color:var(--mist);font-size:.96rem;line-height:1.75;margin-top:8px}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:var(--rXL);overflow:hidden}
-.sv{padding:44px 34px;background:var(--bg3);position:relative;overflow:hidden;transition:all .5s var(--ease)}
-.sv:hover{transform:scale(1.014);z-index:1}
-.sv::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(240,165,0,.1),transparent 65%);opacity:0;transition:.4s}
-.sv:hover::before{opacity:1}
-.svn{font-family:'Playfair Display',serif;font-size:.76rem;color:var(--gold);opacity:.5;margin-bottom:22px;letter-spacing:.1em}
-.svi{width:50px;height:50px;border-radius:12px;background:var(--gold-dim);display:grid;place-items:center;margin-bottom:18px;transition:.4s var(--ease)}
-.sv:hover .svi{background:rgba(240,165,0,.22);transform:scale(1.08) rotate(-4deg)}
-.svi svg{width:24px;height:24px;color:var(--gold)}
-.sv h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;margin-bottom:10px}
-.sv p{color:var(--mist);font-size:.86rem;line-height:1.75}
-.sva{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:.78rem;font-weight:600;color:var(--gold);letter-spacing:.05em;transition:.35s var(--ease)}
-.sv:hover .sva{gap:12px}
-.sva svg{width:13px;height:13px}
-.sv.feat{background:var(--gold)}
-.sv.feat *{color:var(--bg)!important}
-.sv.feat .svi{background:rgba(0,0,0,.12)}
+/* ======== PHOTO STRIP ======== */
+.photo-strip{padding:0;overflow:hidden;background:var(--sky2)}
+.strip-track{display:flex;gap:0;animation:stripScroll 30s linear infinite}
+.strip-track:hover{animation-play-state:paused}
+@keyframes stripScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.strip-item{width:320px;height:220px;flex-shrink:0;overflow:hidden;position:relative}
+.strip-item img{transition:transform .6s var(--ease)}
+.strip-item:hover img{transform:scale(1.07)}
+.strip-item .strip-tag{position:absolute;bottom:12px;left:12px;font-size:.72rem;font-weight:700;color:#fff;background:rgba(10,25,41,.55);backdrop-filter:blur(6px);padding:4px 12px;border-radius:100px;opacity:0;transition:.3s}
+.strip-item:hover .strip-tag{opacity:1}
 
-/* ========== GALLERY ========== */
-.gallery{padding:120px 0;background:var(--bg)}
-.ghead{text-align:center;max-width:600px;margin:0 auto 64px}
+/* ======== SERVICES ======== */
+.services{padding:120px 0;background:var(--ink);position:relative;overflow:hidden}
+.services::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=60')center/cover;opacity:.06}
+.services .h2{color:#fff}.services .h2 em{color:var(--sky4)}
+.services .lbl{color:var(--sky4)}.services .lbl::before{background:var(--sky4)}
+.sh{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:60px}
+.sh p{color:rgba(255,255,255,.5);font-size:.96rem;line-height:1.75;margin-top:8px}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:var(--rXL);overflow:hidden}
+.sv{padding:44px 34px;background:rgba(255,255,255,.04);position:relative;overflow:hidden;transition:all .5s var(--ease);border:1px solid rgba(255,255,255,.04)}
+.sv:hover{transform:translateY(-6px) scale(1.01);background:rgba(91,179,224,.08);border-color:rgba(91,179,224,.2);box-shadow:0 20px 60px rgba(0,0,0,.3);z-index:1}
+.sv::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(91,179,224,.12),transparent 65%);opacity:0;transition:.4s}
+.sv:hover::before{opacity:1}
+.svn{font-family:'Playfair Display',serif;font-size:.76rem;color:var(--sky4);opacity:.45;margin-bottom:22px;letter-spacing:.1em}
+.svi{width:52px;height:52px;border-radius:12px;background:rgba(91,179,224,.1);display:grid;place-items:center;margin-bottom:18px;transition:.5s var(--ease)}
+.sv:hover .svi{background:rgba(91,179,224,.22);transform:scale(1.1) rotate(-6deg)}
+.svi svg{width:25px;height:25px;color:var(--sky4)}
+.sv h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.12rem;margin-bottom:10px;color:#fff}
+.sv p{color:rgba(255,255,255,.45);font-size:.86rem;line-height:1.75}
+.sva{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:.78rem;font-weight:600;color:var(--sky4);letter-spacing:.05em;transition:.35s var(--ease)}
+.sv:hover .sva{gap:14px}
+.sv.feat{background:linear-gradient(135deg,var(--skyDark),var(--ink2));border-color:rgba(91,179,224,.3)}
+.sv.feat h3{color:#fff;font-size:1.3rem}
+.sv.feat p{color:rgba(255,255,255,.6)}
+.sv.feat:hover{background:linear-gradient(135deg,var(--sky4),var(--skyDark))}
+
+/* ======== STATS SECTION ======== */
+.stats-sec{padding:90px 0;background:linear-gradient(135deg,var(--sky2),var(--sky3));position:relative;overflow:hidden}
+.stats-sec::after{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&q=60')center/cover;opacity:.07}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-radius:var(--rXL);overflow:hidden;position:relative;z-index:1}
+.stat-item{padding:44px 28px;text-align:center;background:rgba(255,255,255,.65);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);transition:.4s var(--ease)}
+.stat-item:hover{background:rgba(255,255,255,.9);transform:translateY(-8px);box-shadow:var(--shadow2)}
+.stat-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--skyDark);line-height:1}
+.stat-label{font-size:.82rem;color:var(--mist);margin-top:8px;font-weight:600;letter-spacing:.04em}
+.stat-icon{width:48px;height:48px;border-radius:12px;background:rgba(91,179,224,.12);display:grid;place-items:center;margin:0 auto 16px;transition:.35s var(--ease)}
+.stat-item:hover .stat-icon{background:var(--skyDark);transform:rotate(-8deg)}
+.stat-item:hover .stat-icon svg{color:#fff}
+.stat-icon svg{width:22px;height:22px;color:var(--skyDark);transition:.35s}
+
+/* ======== GALLERY ======== */
+.gallery{padding:120px 0;background:var(--sky1);position:relative;overflow:hidden}
+.gallery::before{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(91,179,224,.1),transparent 70%);pointer-events:none}
+.ghead{text-align:center;max-width:580px;margin:0 auto 60px}
 .ghead p{color:var(--mist);margin-top:12px;font-size:.96rem}
-.ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:260px 260px;gap:12px}
-.gi{border-radius:var(--radius);overflow:hidden;position:relative}
+/* Masonry-style grid */
+.ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:220px 220px 220px;gap:14px}
+.gi{border-radius:var(--r);overflow:hidden;position:relative;box-shadow:var(--shadow)}
 .gi img{transition:transform .8s var(--ease)}
-.gi:hover img{transform:scale(1.07)}
-.gov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,11,14,.85),transparent 55%);opacity:0;transition:.4s var(--ease);display:flex;align-items:flex-end;padding:18px}
+.gi:hover img{transform:scale(1.08)}
+.gov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,41,.75) 0%,transparent 55%);opacity:0;transition:.4s var(--ease);display:flex;align-items:flex-end;padding:18px}
 .gi:hover .gov{opacity:1}
-.gtag{font-size:.75rem;font-weight:600;color:var(--white);background:rgba(240,165,0,.18);border:1px solid rgba(240,165,0,.28);backdrop-filter:blur(6px);padding:5px 12px;border-radius:100px}
-.gi:nth-child(1){grid-column:span 7}
-.gi:nth-child(2){grid-column:span 5}
+.gtag{font-size:.74rem;font-weight:700;color:#fff;background:rgba(91,179,224,.25);border:1px solid rgba(91,179,224,.4);backdrop-filter:blur(6px);padding:5px 12px;border-radius:100px}
+/* Grid placement */
+.gi:nth-child(1){grid-column:span 8;grid-row:span 1}
+.gi:nth-child(2){grid-column:span 4;grid-row:span 2}
 .gi:nth-child(3){grid-column:span 4}
 .gi:nth-child(4){grid-column:span 4}
-.gi:nth-child(5){grid-column:span 4}
+.gi:nth-child(5){grid-column:span 5;grid-row:span 1}
+.gi:nth-child(6){grid-column:span 3}
+.gi:nth-child(7){grid-column:span 4}
+/* Hover lift */
+.gi{transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.gi:hover{transform:scale(1.02);box-shadow:var(--shadow2);z-index:1}
 
-/* ========== PROCESS ========== */
-.process{padding:120px 0;background:var(--bg2)}
+/* ======== PROCESS ======== */
+.process{padding:120px 0;background:var(--sky2);position:relative;overflow:hidden}
+.process::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--skyDark),var(--gold2),var(--skyDark));animation:pgbar 3s linear infinite}
 .phead{text-align:center;max-width:560px;margin:0 auto 80px}
 .phead p{color:var(--mist);margin-top:12px;font-size:.96rem}
-.ptrack{display:flex;position:relative;gap:0}
-.ptrack::before{content:'';position:absolute;top:35px;left:60px;right:60px;height:1px;background:linear-gradient(90deg,var(--gold),rgba(240,165,0,.08))}
-.pstep{flex:1;text-align:center;padding:0 16px}
-.pnum{width:70px;height:70px;border-radius:50%;background:var(--bg3);border:2px solid rgba(255,255,255,.09);display:grid;place-items:center;margin:0 auto 22px;font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--gold);position:relative;z-index:1;transition:.4s var(--ease)}
-.pstep:hover .pnum{border-color:var(--gold);box-shadow:0 0 0 8px rgba(240,165,0,.07);background:var(--gold-dim)}
-.pstep h4{font-weight:600;font-size:.95rem;margin-bottom:8px}
+.ptrack{display:flex;position:relative}
+.ptrack::before{content:'';position:absolute;top:35px;left:70px;right:70px;height:2px;background:linear-gradient(90deg,var(--skyDark),var(--sky3));z-index:0;animation:lineExpand 1.5s 1s var(--ease) both}
+@keyframes lineExpand{from{opacity:0;transform:scaleX(0);transform-origin:left}to{opacity:1;transform:scaleX(1)}}
+.pstep{flex:1;text-align:center;padding:0 16px;position:relative;z-index:1}
+.pnum{width:70px;height:70px;border-radius:50%;background:var(--card);border:3px solid var(--sky3);display:grid;place-items:center;margin:0 auto 22px;font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--skyDark);box-shadow:var(--shadow);transition:.5s var(--ease)}
+.pstep:hover .pnum{border-color:var(--skyDark);background:var(--skyDark);color:#fff;transform:scale(1.1);box-shadow:0 0 0 10px rgba(91,179,224,.12),var(--shadow2)}
+.pstep h4{font-weight:700;font-size:.95rem;margin-bottom:8px;color:var(--ink)}
 .pstep p{color:var(--mist);font-size:.83rem;line-height:1.65}
+/* step icons */
+.picon{width:36px;height:36px;margin:0 auto 10px;color:var(--skyDark);opacity:.5}
 
-/* ========== TESTIMONIALS ========== */
-.testi{padding:120px 0;background:var(--bg);overflow:hidden}
+/* ======== TESTIMONIALS ======== */
+.testi{padding:120px 0;background:var(--sky1);overflow:hidden}
 .thead{margin-bottom:60px}
 .ttrack-w{overflow:hidden;margin:0 -20px}
-.ttrack{display:flex;gap:20px;padding:0 20px;width:max-content;animation:ts 32s linear infinite}
+.ttrack{display:flex;gap:20px;padding:0 20px;width:max-content;animation:ts 34s linear infinite}
 .ttrack:hover{animation-play-state:paused}
 @keyframes ts{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tc{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--rXL);padding:34px;width:360px;flex-shrink:0;transition:.4s var(--ease)}
-.tc:hover{border-color:rgba(240,165,0,.18);transform:translateY(-6px)}
+.tc{background:var(--card);border:1px solid var(--sky3);border-radius:var(--rXL);padding:34px;width:360px;flex-shrink:0;box-shadow:var(--shadow);transition:.4s var(--ease)}
+.tc:hover{border-color:var(--skyDark);box-shadow:var(--shadow2);transform:translateY(-8px)}
 .tstars{color:var(--gold);font-size:.9rem;letter-spacing:3px;margin-bottom:14px}
-.tc blockquote{color:rgba(255,255,255,.65);font-size:.93rem;line-height:1.8;font-style:italic;margin-bottom:22px;position:relative;padding-left:20px}
-.tc blockquote::before{content:'"';position:absolute;left:0;top:-8px;font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold);opacity:.35;line-height:1}
+.tc blockquote{color:var(--mist);font-size:.93rem;line-height:1.8;font-style:italic;margin-bottom:22px;position:relative;padding-left:20px}
+.tc blockquote::before{content:'"';position:absolute;left:0;top:-8px;font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--skyDark);opacity:.4;line-height:1}
 .tauth{display:flex;align-items:center;gap:12px}
-.tav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--bg);font-size:.95rem;flex-shrink:0}
-.tname{font-weight:600;font-size:.88rem}
+.tav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--skyDark),var(--sky4));display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:.9rem;flex-shrink:0}
+.tname{font-weight:700;font-size:.88rem;color:var(--ink)}
 .trole{color:var(--mist);font-size:.75rem;margin-top:2px}
 
-/* ========== WHY US ========== */
-.why{padding:120px 0;background:var(--bg2)}
+/* ======== WHY US ======== */
+.why{padding:120px 0;background:var(--sky2)}
 .wgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
-.wimg{position:relative;height:600px}
-.wim{width:100%;height:100%;border-radius:var(--rXL);overflow:hidden}
-.wim img{width:100%;height:100%}
+.wimg{position:relative;height:620px}
+.wim{width:100%;height:100%;border-radius:var(--rXL);overflow:hidden;box-shadow:var(--shadow2)}
 .wovl{position:absolute;right:-28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
-.wstat{background:var(--bg3);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:18px 22px;min-width:155px;box-shadow:0 18px 50px rgba(0,0,0,.4);transition:.4s var(--ease)}
-.wstat:hover{border-color:var(--gold);transform:translateX(-6px)}
-.wsv{font-family:'Playfair Display',serif;font-weight:700;font-size:1.7rem;color:var(--gold)}
+.wstat{background:var(--card);border:1px solid var(--sky3);border-radius:var(--r);padding:18px 22px;min-width:158px;box-shadow:var(--shadow2);transition:.4s var(--ease)}
+.wstat:hover{border-color:var(--skyDark);transform:translateX(-8px);box-shadow:var(--shadow2)}
+.wsv{font-family:'Playfair Display',serif;font-weight:700;font-size:1.7rem;color:var(--skyDark)}
 .wsl{font-size:.72rem;color:var(--mist);margin-top:3px}
+/* extra mini photo */
+.wmini{position:absolute;bottom:-24px;left:-24px;width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid var(--sky2);box-shadow:var(--shadow2);animation:imgFloat 5.5s ease-in-out infinite .5s}
 .wlist{display:flex;flex-direction:column}
-.wi{padding:26px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:18px;align-items:flex-start;transition:.35s var(--ease)}
-.wi:hover{padding-left:8px}
-.wi:last-child{border-bottom:none}
-.win{font-family:'Playfair Display',serif;font-size:.8rem;color:var(--gold);opacity:.5;flex-shrink:0;margin-top:2px}
-.wi h4{font-weight:600;font-size:.97rem;margin-bottom:5px}
+.wi{padding:24px 0;border-bottom:1px solid var(--sky3);display:flex;gap:18px;align-items:flex-start;transition:.35s var(--ease)}
+.wi:hover{padding-left:10px}.wi:last-child{border-bottom:none}
+.wi-icon{width:40px;height:40px;border-radius:10px;background:var(--sky2);display:grid;place-items:center;flex-shrink:0;transition:.35s var(--ease)}
+.wi:hover .wi-icon{background:var(--skyDark)}.wi:hover .wi-icon svg{color:#fff}
+.wi-icon svg{width:20px;height:20px;color:var(--skyDark);transition:.35s}
+.wi h4{font-weight:700;font-size:.97rem;margin-bottom:5px;color:var(--ink)}
 .wi p{color:var(--mist);font-size:.86rem;line-height:1.7}
 
-/* ========== FAQ ========== */
-.faq{padding:120px 0;background:var(--bg)}
+/* ======== FAQ ======== */
+.faq{padding:120px 0;background:var(--sky1)}
 .fgrid{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start}
 .fl h2{margin-top:12px;margin-bottom:18px}
 .fl p{color:var(--mist);font-size:.96rem;line-height:1.75}
 .fl .btn{margin-top:34px}
-.flist{display:flex;flex-direction:column;gap:3px}
-.fi{background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);overflow:hidden;transition:.3s var(--ease)}
-.fi:hover{border-color:rgba(240,165,0,.14)}
-.fi.op{border-color:rgba(240,165,0,.22)}
-.fq{width:100%;background:none;border:none;cursor:pointer;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.92rem;color:var(--white);text-align:left;transition:.3s}
-.fq:hover{color:var(--gold)}
-.fi.op .fq{color:var(--gold)}
-.fic{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.06);display:grid;place-items:center;flex-shrink:0;transition:.4s var(--ease)}
-.fi.op .fic{background:var(--gold);transform:rotate(45deg)}
-.fic svg{width:11px;height:11px}
+/* Faq image */
+.fl-img{margin-top:32px;border-radius:var(--rXL);overflow:hidden;height:200px;box-shadow:var(--shadow2)}
+.flist{display:flex;flex-direction:column;gap:4px}
+.fi{background:var(--card);border:1px solid var(--sky3);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.3s var(--ease)}
+.fi:hover{border-color:var(--sky4)}
+.fi.op{border-color:var(--skyDark);box-shadow:0 4px 24px rgba(91,179,224,.15)}
+.fq{width:100%;background:none;border:none;cursor:pointer;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.92rem;color:var(--ink);text-align:left;transition:.3s}
+.fq:hover{color:var(--skyDark)}
+.fi.op .fq{color:var(--skyDark)}
+.fic{width:28px;height:28px;border-radius:50%;background:var(--sky2);display:grid;place-items:center;flex-shrink:0;transition:.4s var(--ease)}
+.fi.op .fic{background:var(--skyDark);transform:rotate(45deg)}
+.fic svg{width:12px;height:12px;color:var(--ink);transition:.3s}
+.fi.op .fic svg{color:#fff}
 .fa{max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .4s;color:var(--mist);font-size:.88rem;line-height:1.78}
 .fi.op .fa{max-height:200px;padding:0 22px 20px}
 
-/* ========== CONTACT ========== */
-.contact{padding:120px 0;background:var(--bg2)}
-.cgrid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
-.ci h2{margin-top:12px;margin-bottom:18px}
-.ci p{color:var(--mist);font-size:.96rem;line-height:1.75}
+/* ======== CONTACT ======== */
+.contact{padding:120px 0;background:var(--ink);position:relative;overflow:hidden}
+.contact-waves{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--sky4),var(--skyDark),var(--gold2),var(--skyDark),var(--sky4));background-size:200%;animation:pgbar 3s linear infinite}
+.contact-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=70')center/cover;opacity:.07}
+.contact-ov{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(91,179,224,.1),transparent 70%)}
+.cinner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact .h2{color:#fff}.contact .h2 em{color:var(--sky4)}
+.contact .lbl{color:var(--sky4)}.contact .lbl::before{background:var(--sky4)}
+.ci p{color:rgba(255,255,255,.55);font-size:.96rem;line-height:1.8}
 .cdet{display:flex;flex-direction:column;gap:14px;margin-top:36px}
-.cd{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:var(--radius);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);transition:.35s var(--ease)}
-.cd:hover{border-color:rgba(240,165,0,.18);background:var(--gold-dim);transform:translateX(6px)}
-.cdi{width:40px;height:40px;border-radius:9px;background:var(--gold-dim);display:grid;place-items:center;flex-shrink:0}
-.cdi svg{width:19px;height:19px;color:var(--gold)}
-.cdl{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px}
-.cdv{font-size:.88rem;color:rgba(255,255,255,.72)}
-.cform{background:var(--bg3);border:1px solid rgba(255,255,255,.07);border-radius:var(--rXL);padding:48px 44px}
-.cform h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.55rem;margin-bottom:6px}
-.csub{color:var(--mist);font-size:.86rem;margin-bottom:30px}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
-.fg label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
-.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:13px 15px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--white);transition:.35s var(--ease);width:100%;resize:none}
-.fg input::placeholder,.fg textarea::placeholder{color:var(--mist)}
-.fg select option{background:var(--bg2);color:var(--white)}
-.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--gold);background:rgba(240,165,0,.04);box-shadow:0 0 0 3px rgba(240,165,0,.07)}
-.fg textarea{height:110px}
-.fsub{width:100%;padding:16px;background:var(--gold);color:var(--bg);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.93rem;border:none;border-radius:8px;cursor:pointer;transition:all .4s var(--ease);display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
-.fsub:hover{box-shadow:0 0 44px rgba(240,165,0,.38);transform:translateY(-2px)}
-.fsucc{display:none;text-align:center;padding:18px;margin-top:14px;background:rgba(240,165,0,.07);border:1px solid rgba(240,165,0,.18);border-radius:var(--radius);color:var(--gold);font-weight:600;font-size:.88rem}
+.cd{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:var(--r);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:.35s var(--ease)}
+.cd:hover{background:rgba(91,179,224,.07);border-color:rgba(91,179,224,.2);transform:translateX(6px)}
+.cdi{width:40px;height:40px;border-radius:9px;background:rgba(91,179,224,.12);display:grid;place-items:center;flex-shrink:0;transition:.35s var(--ease)}
+.cd:hover .cdi{background:var(--skyDark)}.cd:hover .cdi svg{color:#fff}
+.cdi svg{width:19px;height:19px;color:var(--sky4);transition:.35s}
+.cdl{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--sky4);font-weight:700;margin-bottom:4px}
+.cdv{font-size:.88rem;color:rgba(255,255,255,.7)}
+.ci-photo{margin-top:28px;border-radius:var(--rXL);overflow:hidden;height:180px;box-shadow:var(--shadow2)}
+/* WA Box */
+.wa-box{background:rgba(255,255,255,.04);border:1px solid rgba(91,179,224,.18);border-radius:var(--rXL);padding:44px 40px}
+.wa-box h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;color:#fff;line-height:1.25;margin-bottom:8px}
+.wa-box h3 em{color:var(--sky4)}
+.wa-box>p{color:rgba(255,255,255,.5);font-size:.93rem;line-height:1.75;margin-bottom:24px}
+.wa-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.wa-opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:.4s var(--ease);cursor:pointer}
+.wa-opt:hover{background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.25);transform:translateX(8px)}
+.wa-opt-ic{width:40px;height:40px;border-radius:10px;background:#25D366;display:grid;place-items:center;flex-shrink:0;transition:.35s var(--ease)}
+.wa-opt:hover .wa-opt-ic{transform:scale(1.1) rotate(-5deg)}
+.wa-opt-ic svg{width:20px;height:20px;color:#fff}
+.wa-opt-t{font-weight:700;font-size:.88rem;color:#fff}
+.wa-opt-s{font-size:.76rem;color:rgba(255,255,255,.4);margin-top:2px}
+.wa-cta{display:flex;align-items:center;justify-content:center;gap:12px;padding:17px;background:#25D366;color:#fff;border-radius:9px;font-weight:700;font-size:1rem;transition:all .4s var(--ease);position:relative;overflow:hidden;border:none;cursor:pointer;width:100%}
+.wa-cta::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-105%);transition:.4s var(--ease)}
+.wa-cta:hover::after{transform:none}
+.wa-cta:hover{background:#1fbd5c;box-shadow:0 8px 36px rgba(37,211,102,.45);transform:translateY(-3px)}
+.wa-cta svg{width:22px;height:22px}
+.wa-note{text-align:center;font-size:.76rem;color:rgba(255,255,255,.28);margin-top:10px}
+.wa-pulse-w{position:relative}
+.wa-pulse-w::before,.wa-pulse-w::after{content:'';position:absolute;inset:-5px;border-radius:13px;border:1.5px solid rgba(37,211,102,.3);animation:wpr 2.5s ease-out infinite}
+.wa-pulse-w::after{animation-delay:.9s}
+@keyframes wpr{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.1);opacity:0}}
 
-/* ========== CTA ========== */
-.cta-s{padding:120px 0;position:relative;overflow:hidden;background:var(--bg)}
-.ctabg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80')center/cover;opacity:.18}
-.ctaov{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(240,165,0,.14),transparent 70%)}
+/* ======== CTA BANNER ======== */
+.cta-s{padding:100px 0;background:linear-gradient(135deg,var(--skyDark),var(--ink2));position:relative;overflow:hidden}
+.cta-s::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1400&q=60')center/cover;opacity:.12}
+.cta-orb{position:absolute;right:-10%;top:-20%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(240,165,0,.15),transparent 70%);animation:sunPulse 5s ease-in-out infinite}
 .ctac{position:relative;z-index:1;text-align:center;max-width:680px;margin:0 auto}
-.ctac h2{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:18px}
-.ctac p{color:rgba(255,255,255,.6);font-size:1.02rem;margin-bottom:40px;line-height:1.7}
+.ctac h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;line-height:1.1;color:#fff;margin-bottom:16px}
+.ctac h2 em{color:var(--gold2)}
+.ctac p{color:rgba(255,255,255,.65);font-size:1rem;margin-bottom:38px;line-height:1.75}
 .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-glow{position:relative}
-.btn-glow::after{content:'';position:absolute;inset:-6px;border-radius:13px;background:var(--gold);opacity:.18;filter:blur(14px);z-index:-1;animation:gp 2.5s ease-in-out infinite}
-@keyframes gp{0%,100%{opacity:.12;transform:scale(1)}50%{opacity:.3;transform:scale(1.04)}}
 
-/* ========== FOOTER ========== */
-footer{background:#070809;padding:80px 0 0}
-.fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1.6fr;gap:48px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.05)}
-.fbd{color:var(--mist);font-size:.86rem;line-height:1.8;margin:14px 0 22px}
-.fsoc{display:flex;gap:10px}
-.fso{width:35px;height:35px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);display:grid;place-items:center;transition:.35s var(--ease)}
-.fso:hover{background:var(--gold);border-color:var(--gold)}
-.fso:hover svg{color:var(--bg)}
-.fso svg{width:15px;height:15px;color:var(--mist)}
-.fh{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:18px}
+/* ======== FOOTER ======== */
+footer{background:#060D18;padding:80px 0 0}
+.fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.06)}
+.fbd{color:rgba(255,255,255,.4);font-size:.86rem;line-height:1.85;margin:14px 0 22px}
+.fsocs{display:flex;gap:10px}
+.fso{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);display:grid;place-items:center;transition:.35s var(--ease)}
+.fso:hover{background:var(--skyDark);border-color:var(--skyDark)}
+.fso svg{width:15px;height:15px;color:rgba(255,255,255,.45);transition:.35s}
+.fso:hover svg{color:#fff}
+.fh{font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px}
 .fls{list-style:none;display:flex;flex-direction:column;gap:11px}
-.fls a{color:rgba(255,255,255,.5);font-size:.86rem;transition:.3s}
-.fls a:hover{color:var(--gold);padding-left:5px}
-.nl p{color:var(--mist);font-size:.84rem;line-height:1.7;margin-bottom:14px}
+.fls a{color:rgba(255,255,255,.45);font-size:.86rem;transition:.3s}
+.fls a:hover{color:var(--sky4);padding-left:5px}
+.nl p{color:rgba(255,255,255,.38);font-size:.84rem;line-height:1.7;margin-bottom:14px}
 .nlf{display:flex}
-.nlf input{flex:1;padding:11px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-right:none;border-radius:6px 0 0 6px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.84rem}
-.nlf input::placeholder{color:var(--mist)}
-.nlf input:focus{outline:none;border-color:var(--gold)}
-.nlf button{padding:11px 15px;background:var(--gold);color:var(--bg);border:none;border-radius:0 6px 6px 0;cursor:pointer;font-weight:700;font-size:.78rem;font-family:'DM Sans',sans-serif;transition:.35s}
-.nlf button:hover{background:var(--gold2)}
+.nlf input{flex:1;padding:11px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-right:none;border-radius:6px 0 0 6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.84rem}
+.nlf input::placeholder{color:rgba(255,255,255,.28)}
+.nlf input:focus{outline:none;border-color:var(--skyDark)}
+.nlf button{padding:11px 15px;background:var(--skyDark);color:#fff;border:none;border-radius:0 6px 6px 0;cursor:pointer;font-weight:700;font-size:.78rem;font-family:'DM Sans',sans-serif;transition:.35s}
+.nlf button:hover{background:var(--sky4)}
 .fbot{display:flex;align-items:center;justify-content:space-between;padding:18px 0;flex-wrap:wrap;gap:12px}
-.fbot p{color:rgba(255,255,255,.28);font-size:.78rem}
-.fbot a{color:var(--gold)}
+.fbot p{color:rgba(255,255,255,.22);font-size:.78rem}
+.fbot a{color:var(--sky4)}
 
-/* ========== WA BUTTON ========== */
-.wa{position:fixed;bottom:28px;right:28px;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 4px 22px rgba(37,211,102,.42);transition:all .4s var(--ease);cursor:pointer}
-.wa:hover{transform:scale(1.12);box-shadow:0 8px 34px rgba(37,211,102,.6)}
-.wa svg{width:28px;height:28px;color:#fff}
-.wap{position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(37,211,102,.35);animation:wr 2s ease-out infinite}
-@keyframes wr{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.45);opacity:0}}
+/* ======== WA FLOAT ======== */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 4px 22px rgba(37,211,102,.5);transition:all .4s var(--ease)}
+.wa-float:hover{transform:scale(1.12) rotate(8deg);box-shadow:0 8px 36px rgba(37,211,102,.65)}
+.wa-float svg{width:28px;height:28px;color:#fff}
+.wafp{position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(37,211,102,.35);animation:wr 2s ease-out infinite}
+.wafp2{position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(37,211,102,.15);animation:wr 2s ease-out infinite .7s}
+@keyframes wr{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
 
-/* ========== RESPONSIVE ========== */
+/* ======== RESPONSIVE ======== */
 @media(max-width:960px){
-  .abg,.wgrid,.cgrid,.fgrid{grid-template-columns:1fr}
-  .abf,.abadge,.wovl{display:none}
+  .abg,.wgrid,.cinner,.fgrid{grid-template-columns:1fr}
+  .abf,.abadge,.ab-mini,.wovl,.wmini{display:none}
   .sgrid{grid-template-columns:1fr 1fr}
   .sh{grid-template-columns:1fr}
   .fg2{grid-template-columns:1fr 1fr}
   .ptrack{flex-direction:column;gap:28px}
   .ptrack::before{display:none}
-  .hstats{flex-wrap:wrap}
-  .hst{min-width:50%}
+  .hstats{flex-wrap:wrap}.hst{min-width:50%}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .ggrid{grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,180px)}
+  .gi:nth-child(n){grid-column:span 3;grid-row:span 1}
+  .gi:nth-child(1){grid-column:span 6}
 }
 @media(max-width:640px){
-  .nls,.ni>.btn{display:none}
-  .hbg{display:flex}
+  .nls,.ni>.btn{display:none}.hbg{display:flex}
   .sgrid{grid-template-columns:1fr}
-  .ggrid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,180px)}
-  .gi:nth-child(n){grid-column:span 1}
-  .gi:nth-child(1){grid-column:span 2}
-  .fr{grid-template-columns:1fr}
-  .cform{padding:28px 22px}
   .fg2{grid-template-columns:1fr}
+  .wa-box{padding:28px 22px}
+  .hstats{flex-direction:column}.hst{border-left:none;border-top:1px solid var(--border)}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .hbg-photo{display:none}
+  .ggrid{grid-template-columns:1fr;grid-template-rows:auto}
+  .gi:nth-child(n){grid-column:span 1;height:200px}
 }
 </style>
 </head>
 <body>
 
 <div id="prog"></div>
+<!-- Floating clouds -->
+<div class="clouds" id="clouds"></div>
 
 <!-- NAVBAR -->
 <nav id="nav">
@@ -344,95 +468,74 @@ footer{background:#070809;padding:80px 0 0}
       <span>ALAN Energy<span class="ls">Renewable Energy Solutions</span></span>
     </a>
     <ul class="nls">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li><li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="btn btn-gold" style="padding:11px 26px;font-size:.83rem;">Free Quote</a>
+    <a href="https://wa.me/2340000000000" class="btn btn-wa" style="padding:11px 22px;font-size:.83rem;" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp Us
+    </a>
     <button class="hbg" id="ham"><span></span><span></span><span></span></button>
   </div>
   <div class="mob" id="mob">
-    <a href="#about">About</a><a href="#services">Services</a>
-    <a href="#gallery">Gallery</a><a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
-    <a href="#contact" style="color:var(--gold)">Book Free Assessment →</a>
+    <a href="#about">About</a><a href="#services">Services</a><a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a><a href="#contact">Contact</a>
+    <a href="https://wa.me/2340000000000" style="color:#25D366;font-weight:700">💬 Chat on WhatsApp</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hbg-img"></div>
-  <div class="hgrad"></div>
-  <div class="hgrid"></div>
-  <div id="pts"></div>
-
+  <div class="hsun"></div>
+  <div class="hsun-core"><div class="hsun-inner"></div></div>
+  <div class="srays">
+    <div class="sray"></div><div class="sray"></div><div class="sray"></div><div class="sray"></div>
+    <div class="sray"></div><div class="sray"></div><div class="sray"></div><div class="sray"></div>
+  </div>
+  <div class="birds" id="birds"></div>
+  <div class="hbg-photo">
+    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&q=85" alt="Solar panels"/>
+  </div>
   <div class="hcont">
     <div class="c">
       <div class="hinner">
-        <div class="hbadge"><span class="dot"></span>Lagos's Premier Solar Company</div>
+        <div class="hbadge"><span class="dot"></span>Nigeria's Premier Solar Company</div>
         <h1 class="ht">
           <div class="hl"><span>Power Your Home.</span></div>
           <div class="hl"><span>Cut Your Bills.</span></div>
           <div class="hl"><span>Go Solar Today.</span></div>
         </h1>
-        <p class="hsub">Alan Renewable Energy Solutions delivers world-class solar installations for homes and offices across Lagos — clean energy, zero generator noise, total power freedom.</p>
+        <p class="hsub">Alan Renewable Energy Solutions delivers world-class solar installations for homes and offices across Nigeria — clean energy, zero generator noise, total power freedom.</p>
         <div class="hbtns">
-          <a href="#contact" class="btn btn-gold btn-glow">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Book Free Assessment
+          <a href="https://wa.me/2340000000000" class="btn btn-wa" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Chat Us on WhatsApp
           </a>
-          <a href="#gallery" class="btn btn-outline">View Our Work</a>
+          <a href="#gallery" class="btn btn-out">View Our Work</a>
         </div>
       </div>
     </div>
   </div>
-
   <div class="hstats">
-    <div class="hst">
-      <div class="hst-v" data-count="500" data-suf="+">500+</div>
-      <div class="hst-l">Installations Completed</div>
-    </div>
-    <div class="hst">
-      <div class="hst-v">99.9%</div>
-      <div class="hst-l">Client Satisfaction Rate</div>
-    </div>
-    <div class="hst">
-      <div class="hst-v" data-count="8" data-suf="+">8+</div>
-      <div class="hst-l">Years Experience</div>
-    </div>
-    <div class="hst">
-      <div class="hst-v">5-Year</div>
-      <div class="hst-l">Installation Warranty</div>
-    </div>
+    <div class="hst"><div class="hst-v" data-count="500" data-suf="+">500+</div><div class="hst-l">Installations Completed</div></div>
+    <div class="hst"><div class="hst-v">99.9%</div><div class="hst-l">Client Satisfaction Rate</div></div>
+    <div class="hst"><div class="hst-v" data-count="8" data-suf="+">8+</div><div class="hst-l">Years Experience</div></div>
+    <div class="hst"><div class="hst-v">2-Year</div><div class="hst-l">Installation Warranty</div></div>
   </div>
-
-  <div class="hscroll">
-    <span>Scroll</span>
-    <div class="hsl"></div>
-  </div>
+  <div class="hscroll"><span>Scroll</span><div class="hsl"></div></div>
 </section>
 
 <!-- MARQUEE -->
 <div class="mq">
   <div class="mqt">
-    <div class="mqi"><div class="sep"></div>Home Solar Installations</div>
-    <div class="mqi"><div class="sep"></div>Office Solar Systems</div>
-    <div class="mqi"><div class="sep"></div>Premium Panel Sales</div>
-    <div class="mqi"><div class="sep"></div>Maintenance &amp; Repair</div>
-    <div class="mqi"><div class="sep"></div>Solar Accessories</div>
-    <div class="mqi"><div class="sep"></div>Free Site Assessment</div>
-    <div class="mqi"><div class="sep"></div>5-Year Warranty Included</div>
-    <div class="mqi"><div class="sep"></div>Certified Engineers</div>
-    <div class="mqi"><div class="sep"></div>Home Solar Installations</div>
-    <div class="mqi"><div class="sep"></div>Office Solar Systems</div>
-    <div class="mqi"><div class="sep"></div>Premium Panel Sales</div>
-    <div class="mqi"><div class="sep"></div>Maintenance &amp; Repair</div>
-    <div class="mqi"><div class="sep"></div>Solar Accessories</div>
-    <div class="mqi"><div class="sep"></div>Free Site Assessment</div>
-    <div class="mqi"><div class="sep"></div>5-Year Warranty Included</div>
-    <div class="mqi"><div class="sep"></div>Certified Engineers</div>
+    <div class="mqi"><div class="sp"></div>Home Solar Installations</div><div class="mqi"><div class="sp"></div>Office Solar Systems</div>
+    <div class="mqi"><div class="sp"></div>Premium Panel Sales</div><div class="mqi"><div class="sp"></div>Maintenance &amp; Repair</div>
+    <div class="mqi"><div class="sp"></div>Nationwide Service — All 36 States</div><div class="mqi"><div class="sp"></div>Free Site Assessment</div>
+    <div class="mqi"><div class="sp"></div>2-Year Warranty</div><div class="mqi"><div class="sp"></div>Certified Engineers</div>
+    <div class="mqi"><div class="sp"></div>Home Solar Installations</div><div class="mqi"><div class="sp"></div>Office Solar Systems</div>
+    <div class="mqi"><div class="sp"></div>Premium Panel Sales</div><div class="mqi"><div class="sp"></div>Maintenance &amp; Repair</div>
+    <div class="mqi"><div class="sp"></div>Nationwide Service — All 36 States</div><div class="mqi"><div class="sp"></div>Free Site Assessment</div>
+    <div class="mqi"><div class="sp"></div>2-Year Warranty</div><div class="mqi"><div class="sp"></div>Certified Engineers</div>
   </div>
 </div>
 
@@ -440,89 +543,94 @@ footer{background:#070809;padding:80px 0 0}
 <section class="about" id="about">
   <div class="c abg">
     <div class="abimg rl">
-      <div class="abm">
-        <img src="https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?w=800&q=85" alt="Solar installation technician" loading="lazy"/>
-      </div>
-      <div class="abf">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=85" alt="Solar farm" loading="lazy"/>
-      </div>
+      <div class="abm"><img src="https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?w=900&q=85" alt="Solar technician" loading="lazy"/></div>
+      <div class="abf"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=85" alt="Solar farm" loading="lazy"/></div>
+      <div class="ab-mini"><img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=300&q=85" alt="Installation" loading="lazy"/></div>
       <div class="abadge"><div class="n">8+</div><div class="t">Years of<br/>Excellence</div></div>
     </div>
     <div class="abt rr">
       <div class="lbl">Who We Are</div>
-      <h2 class="h2">Lagos's Most Trusted <em>Solar Partner</em></h2>
-      <p>Alan Renewable Energy Solutions is a premium solar installation company based in Festac, Lagos. For over eight years, we've been freeing Nigerian homes and businesses from unstable public power — one rooftop at a time.</p>
-      <p>From the first site visit to final switch-on, every step is handled by our certified engineering team. Full transparency on pricing, zero hidden fees, and a 5-year warranty you can count on.</p>
+      <h2 class="h2">Nigeria's Most Trusted <em>Solar Partner</em></h2>
+      <p>Alan Renewable Energy Solutions is a premium solar installation company headquartered in Festac, Lagos, serving clients across all 36 states in Nigeria. For over eight years, we've been freeing Nigerian homes and businesses from the frustration of public power supply.</p>
+      <p>From your first WhatsApp message to the final switch-on, every step is handled by our certified engineering team with full transparency, zero hidden fees, and a 2-year workmanship warranty.</p>
       <div class="perks">
-        <div class="pk">
-          <div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-          <div><h4>Certified Engineering Team</h4><p>Every engineer holds professional solar certification and years of field experience.</p></div>
-        </div>
-        <div class="pk">
-          <div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-          <div><h4>Premium Equipment Only</h4><p>We source exclusively from globally certified panel and inverter manufacturers.</p></div>
-        </div>
-        <div class="pk">
-          <div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
-          <div><h4>Responsive After-Sales Support</h4><p>Our team stays available long after installation for maintenance and repairs.</p></div>
-        </div>
+        <div class="pk"><div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div><h4>Certified Engineering Team</h4><p>Every engineer holds professional solar certification and years of real field experience.</p></div></div>
+        <div class="pk"><div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><h4>Premium Equipment Only</h4><p>We source exclusively from globally certified panel and inverter manufacturers.</p></div></div>
+        <div class="pk"><div class="pki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h4>Nationwide Coverage</h4><p>We operate in Lagos, Abuja, Port Harcourt, Ibadan, Enugu, Kano and across all states.</p></div></div>
       </div>
-      <a href="#contact" class="btn btn-gold">Start Your Solar Journey →</a>
+      <a href="https://wa.me/2340000000000" class="btn btn-sky" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Start on WhatsApp
+      </a>
     </div>
   </div>
 </section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="strip-track">
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=640&q=80" alt="Solar panels" loading="lazy"/><span class="strip-tag">Residential</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80" alt="Solar farm" loading="lazy"/><span class="strip-tag">Commercial Farm</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=640&q=80" alt="Rooftop solar" loading="lazy"/><span class="strip-tag">Rooftop Array</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=640&q=80" alt="Solar sunset" loading="lazy"/><span class="strip-tag">Premium Panels</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=640&q=80" alt="Solar install" loading="lazy"/><span class="strip-tag">Installation</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1530518226255-0ba1b4a7e4ff?w=640&q=80" alt="Solar tech" loading="lazy"/><span class="strip-tag">Maintenance</span></div>
+    <!-- duplicate -->
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=640&q=80" alt="Solar panels" loading="lazy"/><span class="strip-tag">Residential</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80" alt="Solar farm" loading="lazy"/><span class="strip-tag">Commercial Farm</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=640&q=80" alt="Rooftop solar" loading="lazy"/><span class="strip-tag">Rooftop Array</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=640&q=80" alt="Solar sunset" loading="lazy"/><span class="strip-tag">Premium Panels</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=640&q=80" alt="Solar install" loading="lazy"/><span class="strip-tag">Installation</span></div>
+    <div class="strip-item"><img src="https://images.unsplash.com/photo-1530518226255-0ba1b4a7e4ff?w=640&q=80" alt="Solar tech" loading="lazy"/><span class="strip-tag">Maintenance</span></div>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="c">
     <div class="sh r">
-      <div>
-        <div class="lbl">What We Offer</div>
-        <h2 class="h2">Our <em>Solar Services</em></h2>
-      </div>
-      <div><p>From a single panel purchase to a complete commercial solar system — we handle everything with certified expertise and transparent pricing.</p></div>
+      <div><div class="lbl">What We Offer</div><h2 class="h2">Our <em>Solar Services</em></h2></div>
+      <div><p>From a single panel to a full commercial system — certified expertise, transparent pricing, and nationwide delivery across Nigeria.</p></div>
     </div>
     <div class="sgrid">
-      <div class="sv r d1" id="sv1">
-        <div class="svn">01</div>
-        <div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3>Home Solar Installation</h3>
-        <p>Custom residential systems sized exactly to your power needs — from single flats to large family homes. Installed in 1–2 days with minimal disruption.</p>
-        <div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="sv r d1" id="s1"><div class="svn">01</div><div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Home Installation</h3><p>Custom residential systems sized to your exact load — apartments, duplexes, large homes. Installed by certified engineers in 1–2 days.</p><div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="sv r d2" id="s2"><div class="svn">02</div><div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>Office &amp; Commercial</h3><p>High-capacity systems for businesses of any size. Keep operations running 24/7 — no fuel, no noise, zero downtime, guaranteed.</p><div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="sv r d3" id="s3"><div class="svn">03</div><div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.96-1.61L23 6H6"/></svg></div><h3>Panel Sales</h3><p>Premium monocrystalline and polycrystalline panels from certified global brands — supplied with full documentation, nationwide delivery.</p><div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="sv r d4" id="s4"><div class="svn">04</div><div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3>Maintenance &amp; Repair</h3><p>Panel cleaning, fault diagnosis, inverter servicing and emergency repairs. We protect your investment all year round.</p><div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="sv r d5" id="s5"><div class="svn">05</div><div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><h3>Solar Accessories</h3><p>Inverters, lithium batteries, charge controllers, mounting frames, cables — in stock and delivered anywhere in Nigeria.</p><div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="sv feat r d6"><div class="svn" style="color:var(--sky4);opacity:.5">✦</div><h3>Ready to go solar?</h3><p style="margin-top:10px">Message us now. Free assessment, zero pressure — expert advice tailored to your property and budget, anywhere in Nigeria.</p>
+        <a href="https://wa.me/2340000000000" class="btn btn-wa" style="margin-top:22px" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Chat on WhatsApp
+        </a>
       </div>
-      <div class="sv r d2" id="sv2">
-        <div class="svn">02</div>
-        <div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h3>Office &amp; Commercial</h3>
-        <p>High-capacity systems for businesses of all sizes. Keep your operations running 24/7 — no generator noise, no fuel costs, no downtime.</p>
-        <div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-sec">
+  <div class="c">
+    <div class="stats-grid">
+      <div class="stat-item r d1">
+        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+        <div class="stat-num" data-count="500" data-suf="+">500+</div>
+        <div class="stat-label">Installations Completed</div>
       </div>
-      <div class="sv r d3" id="sv3">
-        <div class="svn">03</div>
-        <div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.96-1.61L23 6H6"/></svg></div>
-        <h3>Panel Sales</h3>
-        <p>Premium mono and polycrystalline solar panels from internationally certified brands — supplied directly with full product documentation and warranty.</p>
-        <div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="stat-item r d2">
+        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <div class="stat-num">99.9%</div>
+        <div class="stat-label">Client Satisfaction</div>
       </div>
-      <div class="sv r d4" id="sv4">
-        <div class="svn">04</div>
-        <div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3>Maintenance &amp; Repair</h3>
-        <p>Panel cleaning, fault diagnosis, inverter servicing, and emergency repairs. We protect your investment and keep your system at peak efficiency year-round.</p>
-        <div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="stat-item r d3">
+        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="stat-num" data-count="8" data-suf="+">8+</div>
+        <div class="stat-label">Years Experience</div>
       </div>
-      <div class="sv r d5" id="sv5">
-        <div class="svn">05</div>
-        <div class="svi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-        <h3>Solar Accessories</h3>
-        <p>Inverters, lithium batteries, charge controllers, mounting structures, cables — everything you need for a complete and efficient solar setup, in stock.</p>
-        <div class="sva">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      </div>
-      <div class="sv feat r d6">
-        <div class="svn" style="opacity:.4">✦</div>
-        <h3 style="font-size:1.4rem;margin-top:12px">Ready to switch to solar?</h3>
-        <p style="margin-top:12px;opacity:.75">Book a free site assessment. No commitment, no pressure — just expert advice tailored to your property.</p>
-        <a href="#contact" class="btn" style="background:var(--bg);color:var(--gold);margin-top:28px;font-weight:700">Book Free Consultation →</a>
+      <div class="stat-item r d4">
+        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+        <div class="stat-num" data-count="36" data-suf="">36</div>
+        <div class="stat-label">States Served Nationwide</div>
       </div>
     </div>
   </div>
@@ -534,29 +642,16 @@ footer{background:#070809;padding:80px 0 0}
     <div class="ghead r">
       <div class="lbl" style="justify-content:center">Our Work</div>
       <h2 class="h2">Installation <em>Gallery</em></h2>
-      <p>Real projects, real results — a look at some of our completed residential and commercial solar installations across Lagos.</p>
+      <p>Real projects across Nigeria — residential and commercial solar installations by our certified teams.</p>
     </div>
-    <div class="ggrid r">
-      <div class="gi">
-        <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=900&q=85" alt="Residential solar panels" loading="lazy"/>
-        <div class="gov"><span class="gtag">Residential Installation</span></div>
-      </div>
-      <div class="gi">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85" alt="Commercial solar farm" loading="lazy"/>
-        <div class="gov"><span class="gtag">Commercial System</span></div>
-      </div>
-      <div class="gi">
-        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=85" alt="Rooftop solar installation" loading="lazy"/>
-        <div class="gov"><span class="gtag">Rooftop Array</span></div>
-      </div>
-      <div class="gi">
-        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=85" alt="Solar panels at sunset" loading="lazy"/>
-        <div class="gov"><span class="gtag">Premium Panels</span></div>
-      </div>
-      <div class="gi">
-        <img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=600&q=85" alt="Solar panel installation" loading="lazy"/>
-        <div class="gov"><span class="gtag">Office Installation</span></div>
-      </div>
+    <div class="ggrid">
+      <div class="gi rs"><img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1000&q=85" alt="Residential" loading="lazy"/><div class="gov"><span class="gtag">Residential Installation</span></div></div>
+      <div class="gi rs d1"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85" alt="Commercial" loading="lazy"/><div class="gov"><span class="gtag">Commercial System</span></div></div>
+      <div class="gi rs d2"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=85" alt="Solar panels" loading="lazy"/><div class="gov"><span class="gtag">Premium Panels</span></div></div>
+      <div class="gi rs d3"><img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=600&q=85" alt="Installation" loading="lazy"/><div class="gov"><span class="gtag">Office Installation</span></div></div>
+      <div class="gi rs d4"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&q=85" alt="Rooftop" loading="lazy"/><div class="gov"><span class="gtag">Rooftop Array</span></div></div>
+      <div class="gi rs d5"><img src="https://images.unsplash.com/photo-1530518226255-0ba1b4a7e4ff?w=500&q=85" alt="Technician" loading="lazy"/><div class="gov"><span class="gtag">Expert Technician</span></div></div>
+      <div class="gi rs d6"><img src="https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?w=600&q=85" alt="Solar work" loading="lazy"/><div class="gov"><span class="gtag">Panel Maintenance</span></div></div>
     </div>
   </div>
 </section>
@@ -566,41 +661,35 @@ footer{background:#070809;padding:80px 0 0}
   <div class="c">
     <div class="phead r">
       <div class="lbl" style="justify-content:center">How It Works</div>
-      <h2 class="h2">From Consultation <em>to Switch-On</em></h2>
-      <p>A simple, transparent process that gets you from enquiry to full solar power in as little as one week.</p>
+      <h2 class="h2">From WhatsApp <em>to Switch-On</em></h2>
+      <p>First message to full solar power in as little as one week — anywhere in Nigeria.</p>
     </div>
     <div class="ptrack">
-      <div class="pstep r d1"><div class="pnum">1</div><h4>Book a Consultation</h4><p>Contact us via phone, WhatsApp or our form to schedule your free site visit at a time that suits you.</p></div>
-      <div class="pstep r d2"><div class="pnum">2</div><h4>Site Assessment</h4><p>Our engineers visit your property, assess your energy load, roof space and advise on the optimal system size.</p></div>
-      <div class="pstep r d3"><div class="pnum">3</div><h4>Receive Your Quote</h4><p>We deliver a transparent, itemised proposal within 24 hours — full breakdown of components and costs. No surprises.</p></div>
-      <div class="pstep r d4"><div class="pnum">4</div><h4>Installation Day</h4><p>Our certified team installs your system cleanly and efficiently, typically completing residential jobs in a single day.</p></div>
-      <div class="pstep r d5"><div class="pnum">5</div><h4>Power Up &amp; Save</h4><p>We walk you through everything, hand over your warranty documents, and you start saving on electricity immediately.</p></div>
+      <div class="pstep r d1"><div class="pnum">1</div><h4>Message Us</h4><p>Chat us on WhatsApp with your location and energy needs. We respond within the hour on business days.</p></div>
+      <div class="pstep r d2"><div class="pnum">2</div><h4>Site Assessment</h4><p>Our engineers visit your property, assess your load and roof space, and recommend the ideal system for you.</p></div>
+      <div class="pstep r d3"><div class="pnum">3</div><h4>Receive Quote</h4><p>A transparent, itemised quote within 24 hours — full component breakdown. No surprises, ever.</p></div>
+      <div class="pstep r d4"><div class="pnum">4</div><h4>Installation Day</h4><p>Certified team installs cleanly and efficiently. Most residential jobs completed in a single day.</p></div>
+      <div class="pstep r d5"><div class="pnum">5</div><h4>Power Up &amp; Save</h4><p>You receive your 2-year warranty, a full system walkthrough, and start saving immediately.</p></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="testi">
-  <div class="c">
-    <div class="thead r">
-      <div class="lbl">Client Stories</div>
-      <h2 class="h2">What Our <em>Clients Say</em></h2>
-    </div>
-  </div>
+  <div class="c"><div class="thead r"><div class="lbl">Client Stories</div><h2 class="h2">What Our <em>Clients Say</em></h2></div></div>
   <div class="ttrack-w">
     <div class="ttrack">
-      <!-- Set 1 -->
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Alan Energy transformed our home completely. We haven't relied on NEPA once since they installed our system eight months ago. Professional team, honest pricing, and they actually answered my calls after installation.</blockquote><div class="tauth"><div class="tav">MO</div><div><div class="tname">Mr. Michael Okonkwo</div><div class="trole">Homeowner, Festac Town</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Our office used to lose three to four productive hours every day. After Alan Energy's commercial installation, we've had zero downtime in five months. The ROI has already started showing on our bills.</blockquote><div class="tauth"><div class="tav">CA</div><div><div class="tname">Mrs. Chidinma Afolabi</div><div class="trole">Business Owner, Lagos Island</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>From the free site assessment to the final handover, everything was handled professionally. No hidden charges, no surprises. They even checked in two weeks later to make sure everything was working well.</blockquote><div class="tauth"><div class="tav">AE</div><div><div class="tname">Engr. Adebayo Emmanuel</div><div class="trole">Homeowner, Satellite Town</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>I got quotes from three companies. Alan came in with the best price for premium panels and were the only ones who gave me a detailed written breakdown. Installation was done in one day. Very impressed.</blockquote><div class="tauth"><div class="tav">TI</div><div><div class="tname">Tunde Ibrahim</div><div class="trole">Homeowner, Amuwo Odofin</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>The maintenance package is worth every naira. They come quarterly, clean the panels, check the inverter and batteries, and send a detailed report. My system has been at 97% efficiency for two years straight.</blockquote><div class="tauth"><div class="tav">NK</div><div><div class="tname">Ngozi Kalu</div><div class="trole">Property Owner, Victoria Island</div></div></div></div>
-      <!-- Set 2 (duplicate for loop) -->
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Alan Energy transformed our home completely. We haven't relied on NEPA once since they installed our system eight months ago. Professional team, honest pricing, and they actually answered my calls after installation.</blockquote><div class="tauth"><div class="tav">MO</div><div><div class="tname">Mr. Michael Okonkwo</div><div class="trole">Homeowner, Festac Town</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Our office used to lose three to four productive hours every day. After Alan Energy's commercial installation, we've had zero downtime in five months. The ROI has already started showing on our bills.</blockquote><div class="tauth"><div class="tav">CA</div><div><div class="tname">Mrs. Chidinma Afolabi</div><div class="trole">Business Owner, Lagos Island</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>From the free site assessment to the final handover, everything was handled professionally. No hidden charges, no surprises. They even checked in two weeks later to make sure everything was working well.</blockquote><div class="tauth"><div class="tav">AE</div><div><div class="tname">Engr. Adebayo Emmanuel</div><div class="trole">Homeowner, Satellite Town</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>I got quotes from three companies. Alan came in with the best price for premium panels and were the only ones who gave me a detailed written breakdown. Installation was done in one day. Very impressed.</blockquote><div class="tauth"><div class="tav">TI</div><div><div class="tname">Tunde Ibrahim</div><div class="trole">Homeowner, Amuwo Odofin</div></div></div></div>
-      <div class="tc"><div class="tstars">★★★★★</div><blockquote>The maintenance package is worth every naira. They come quarterly, clean the panels, check the inverter and batteries, and send a detailed report. My system has been at 97% efficiency for two years straight.</blockquote><div class="tauth"><div class="tav">NK</div><div><div class="tname">Ngozi Kalu</div><div class="trole">Property Owner, Victoria Island</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Alan Energy transformed our home. Haven't touched NEPA once in eight months. Professional team, honest pricing — and they answered calls after installation too.</blockquote><div class="tauth"><div class="tav">MO</div><div><div class="tname">Mr. Michael Okonkwo</div><div class="trole">Homeowner, Lagos</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Our Abuja office lost hours daily to power cuts. After Alan Energy's installation, zero downtime in five months. The ROI showed on our bills within the first month.</blockquote><div class="tauth"><div class="tav">CA</div><div><div class="tname">Mrs. Chidinma Afolabi</div><div class="trole">Business Owner, Abuja</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>From the free WhatsApp consultation to handover — completely professional. No hidden charges. They followed up two weeks later to check the system was performing well.</blockquote><div class="tauth"><div class="tav">AE</div><div><div class="tname">Engr. Adebayo Emmanuel</div><div class="trole">Homeowner, Port Harcourt</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Got quotes from three companies. Alan had the best price, most detailed breakdown, and finished installation in one day. Extremely satisfied with the service.</blockquote><div class="tauth"><div class="tav">TI</div><div><div class="tname">Tunde Ibrahim</div><div class="trole">Homeowner, Ibadan</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Their maintenance package is outstanding. Quarterly visits, panel cleaning, inverter checks, detailed reports. My system has run above 95% efficiency for two years.</blockquote><div class="tauth"><div class="tav">NK</div><div><div class="tname">Ngozi Kalu</div><div class="trole">Property Owner, Enugu</div></div></div></div>
+      <!-- duplicates -->
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Alan Energy transformed our home. Haven't touched NEPA once in eight months. Professional team, honest pricing — and they answered calls after installation too.</blockquote><div class="tauth"><div class="tav">MO</div><div><div class="tname">Mr. Michael Okonkwo</div><div class="trole">Homeowner, Lagos</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Our Abuja office lost hours daily to power cuts. After Alan Energy's installation, zero downtime in five months. The ROI showed on our bills within the first month.</blockquote><div class="tauth"><div class="tav">CA</div><div><div class="tname">Mrs. Chidinma Afolabi</div><div class="trole">Business Owner, Abuja</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>From the free WhatsApp consultation to handover — completely professional. No hidden charges. They followed up two weeks later to check the system was performing well.</blockquote><div class="tauth"><div class="tav">AE</div><div><div class="tname">Engr. Adebayo Emmanuel</div><div class="trole">Homeowner, Port Harcourt</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Got quotes from three companies. Alan had the best price, most detailed breakdown, and finished installation in one day. Extremely satisfied with the service.</blockquote><div class="tauth"><div class="tav">TI</div><div><div class="tname">Tunde Ibrahim</div><div class="trole">Homeowner, Ibadan</div></div></div></div>
+      <div class="tc"><div class="tstars">★★★★★</div><blockquote>Their maintenance package is outstanding. Quarterly visits, panel cleaning, inverter checks, detailed reports. My system has run above 95% efficiency for two years.</blockquote><div class="tauth"><div class="tav">NK</div><div><div class="tname">Ngozi Kalu</div><div class="trole">Property Owner, Enugu</div></div></div></div>
     </div>
   </div>
 </section>
@@ -609,24 +698,23 @@ footer{background:#070809;padding:80px 0 0}
 <section class="why" id="why">
   <div class="c wgrid">
     <div class="wimg rl">
-      <div class="wim">
-        <img src="https://images.unsplash.com/photo-1530518226255-0ba1b4a7e4ff?w=900&q=85" alt="Solar panel technician at work" loading="lazy"/>
-      </div>
+      <div class="wim"><img src="https://images.unsplash.com/photo-1530518226255-0ba1b4a7e4ff?w=900&q=85" alt="Solar technician" loading="lazy"/></div>
       <div class="wovl">
         <div class="wstat"><div class="wsv">500+</div><div class="wsl">Projects Done</div></div>
         <div class="wstat"><div class="wsv">99.9%</div><div class="wsl">Satisfaction</div></div>
-        <div class="wstat"><div class="wsv">5yr</div><div class="wsl">Warranty</div></div>
+        <div class="wstat"><div class="wsv">2yr</div><div class="wsl">Warranty</div></div>
       </div>
+      <div class="wmini"><img src="https://images.unsplash.com/photo-1545208642-9e3607c858c9?w=300&q=85" alt="Installation" loading="lazy"/></div>
     </div>
     <div class="rr">
       <div class="lbl">Why Alan Energy</div>
-      <h2 class="h2" style="margin-bottom:8px">The Smart <em>Solar Choice</em></h2>
-      <p style="color:var(--mist);font-size:.95rem;margin-bottom:8px">We don't just sell solar panels — we deliver lasting energy freedom backed by real expertise and genuine after-sale care.</p>
+      <h2 class="h2">The Smart <em>Solar Choice</em></h2>
+      <p style="color:var(--mist);font-size:.95rem;margin:10px 0 6px;line-height:1.75">We don't just sell panels — we deliver lasting energy freedom backed by real expertise and nationwide care.</p>
       <div class="wlist">
-        <div class="wi"><div class="win">01</div><div><h4>Certified Engineers on Every Job</h4><p>No shortcuts. Every installation is carried out by fully qualified solar engineers who meet international safety standards.</p></div></div>
-        <div class="wi"><div class="win">02</div><div><h4>Custom System Design</h4><p>We size every system to your actual load — no overselling, no undersizing. Just the right system for your specific needs and budget.</p></div></div>
-        <div class="wi"><div class="win">03</div><div><h4>Transparent Pricing</h4><p>Our quotes are itemised and fixed. What we quote is what you pay — no surprise charges on installation day.</p></div></div>
-        <div class="wi"><div class="win">04</div><div><h4>Long-Term Relationship</h4><p>We provide ongoing maintenance, annual inspections, and fast emergency support because your system's performance matters to us.</p></div></div>
+        <div class="wi"><div class="wi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div><h4>Certified Engineers on Every Job</h4><p>Every installation carried out by fully qualified solar engineers meeting international safety standards.</p></div></div>
+        <div class="wi"><div class="wi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div><div><h4>Transparent Pricing</h4><p>Itemised, fixed quotes. What we quote is what you pay — no surprise charges on installation day.</p></div></div>
+        <div class="wi"><div class="wi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><h4>Custom System Design</h4><p>We size every system to your actual load — no overselling, no undersizing, just right for your needs.</p></div></div>
+        <div class="wi"><div class="wi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h4>All 36 States Covered</h4><p>From Lagos to Kano, Port Harcourt to Maiduguri — we go wherever you are in Nigeria.</p></div></div>
       </div>
     </div>
   </div>
@@ -638,119 +726,73 @@ footer{background:#070809;padding:80px 0 0}
     <div class="fl rl">
       <div class="lbl">Common Questions</div>
       <h2 class="h2">Frequently Asked <em>Questions</em></h2>
-      <p>Everything you need to know before making your solar decision. Still have questions? We're happy to answer them.</p>
-      <a href="#contact" class="btn btn-gold">Ask Us Directly →</a>
+      <p>Everything you need to know before going solar. Still have questions? Message us directly — we respond fast.</p>
+      <a href="https://wa.me/2340000000000" class="btn btn-wa" style="margin-top:28px" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Ask on WhatsApp
+      </a>
+      <div class="fl-img"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80" alt="Solar panels" loading="lazy"/></div>
     </div>
     <div class="flist rr">
-      <div class="fi">
-        <button class="fq">How much does a solar installation cost?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">Cost depends on your energy needs and system size. A basic home system can start from ₦800,000, while larger commercial systems vary. We always provide a detailed written quote after our free site assessment — no hidden fees, ever.</div>
-      </div>
-      <div class="fi">
-        <button class="fq">How long does installation take?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">Most residential installations are completed within one to two days. Commercial projects may take three to five days. Our full process — from consultation to switch-on — typically takes five to seven working days.</div>
-      </div>
-      <div class="fi">
-        <button class="fq">Do solar panels work during cloudy or rainy days?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">Yes — panels still generate electricity on overcast days, typically at 10–25% of their peak output. With a properly sized battery bank, your home or office will have sufficient power through extended cloudy periods.</div>
-      </div>
-      <div class="fi">
-        <button class="fq">What warranty do you provide?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">We include a 5-year workmanship warranty on all installations. Solar panels carry a manufacturer product warranty of 10–12 years and a performance warranty up to 25 years. Inverters and batteries carry 2–5 year manufacturer warranties.</div>
-      </div>
-      <div class="fi">
-        <button class="fq">Do you offer payment plans?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">Yes. We offer flexible instalment arrangements to make solar energy accessible without requiring full upfront payment. Contact us to discuss a plan that works for your budget.</div>
-      </div>
-      <div class="fi">
-        <button class="fq">What maintenance does the system require?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button>
-        <div class="fa">Solar systems are very low maintenance. We recommend a professional inspection and panel cleaning every six to twelve months. We offer affordable maintenance packages to keep your system at peak efficiency all year.</div>
-      </div>
+      <div class="fi"><button class="fq">How much does a solar installation cost?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button><div class="fa">Cost depends on your energy needs and system size. A basic home system starts from around ₦800,000, while commercial systems vary. We always provide a detailed written quote after a free site assessment — no hidden fees.</div></div>
+      <div class="fi"><button class="fq">How long does installation take?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button><div class="fa">Most residential installations are completed in one to two days. Commercial projects may take three to five days. Our full process from first WhatsApp message to switch-on typically takes five to seven working days.</div></div>
+      <div class="fi"><button class="fq">Do you serve locations outside Lagos?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button><div class="fa">Yes — we operate across all 36 states in Nigeria including Abuja, Port Harcourt, Ibadan, Enugu, Kano, Benin City, Owerri and more. Message us on WhatsApp with your location and we'll confirm availability.</div></div>
+      <div class="fi"><button class="fq">What warranty do you provide?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button><div class="fa">We include a 2-year workmanship warranty on all installations. Solar panels carry a manufacturer warranty of 10–12 years and a performance warranty of up to 25 years. Inverters and batteries carry 2–5 year manufacturer warranties.</div></div>
+      <div class="fi"><button class="fq">Do panels work during cloudy days?<div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div></button><div class="fa">Yes — panels still generate electricity on cloudy days, typically at 10–25% of peak output. With a properly sized battery bank, you'll have sufficient power through overcast periods. Nigeria's sun is excellent year-round.</div></div>
+
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="c cgrid">
+  <div class="contact-waves"></div><div class="contact-bg"></div><div class="contact-ov"></div>
+  <div class="c cinner">
     <div class="ci rl">
       <div class="lbl">Get In Touch</div>
       <h2 class="h2">Let's Power <em>Your Space</em></h2>
-      <p>Book a free consultation or send us a message. Our team responds within two hours on business days — and we never pressure you into a decision.</p>
+      <p>Skip the forms — just message us directly on WhatsApp. Zero pressure, expert advice, and we respond within the hour on business days.</p>
       <div class="cdet">
-        <div class="cd">
-          <div class="cdi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
-          <div><div class="cdl">Address</div><div class="cdv">311 Road D-Close, Festac Town, Lagos</div></div>
-        </div>
-        <div class="cd">
-          <div class="cdi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-          <div><div class="cdl">Email</div><div class="cdv"><a href="mailto:operations@alangrp.com" style="color:rgba(255,255,255,.72)">operations@alangrp.com</a></div></div>
-        </div>
-        <div class="cd">
-          <div class="cdi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
-          <div><div class="cdl">WhatsApp</div><div class="cdv">Chat with us directly on WhatsApp</div></div>
-        </div>
-        <div class="cd">
-          <div class="cdi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <div><div class="cdl">Hours</div><div class="cdv">Monday – Saturday: 8:00 AM – 6:00 PM</div></div>
-        </div>
+        <div class="cd"><div class="cdi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div><div><div class="cdl">Head Office</div><div class="cdv">311 Road D-Close, Festac Town, Lagos</div></div></div>
+        <div class="cd"><div class="cdi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div><div class="cdl">Email</div><div class="cdv"><a href="mailto:operations@alangrp.com" style="color:rgba(255,255,255,.7)">operations@alangrp.com</a></div></div></div>
+        <div class="cd"><div class="cdi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/><circle cx="12" cy="12" r="10"/></svg></div><div><div class="cdl">Service Area</div><div class="cdv">All 36 States across Nigeria</div></div></div>
+        <div class="cd"><div class="cdi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div class="cdl">Business Hours</div><div class="cdv">Monday – Saturday: 8:00 AM – 6:00 PM</div></div></div>
       </div>
+      <div class="ci-photo"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Solar installation" loading="lazy"/></div>
     </div>
-    <div class="cform rr">
-      <h3>Book a Free Consultation</h3>
-      <p class="csub">Fill the form and our team will reach out within 2 hours on business days.</p>
-      <form id="cf" onsubmit="handleForm(event)">
-        <div class="fr">
-          <div class="fg"><label>Full Name *</label><input type="text" placeholder="John Adeyemi" required/></div>
-          <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="08012345678" required/></div>
-        </div>
-        <div class="fg"><label>Email Address</label><input type="email" placeholder="john@example.com"/></div>
-        <div class="fg"><label>Service Interested In *</label>
-          <select required>
-            <option value="">Choose a service...</option>
-            <option>Home Solar Installation</option>
-            <option>Office / Commercial Installation</option>
-            <option>Solar Panel Purchase</option>
-            <option>Maintenance / Repair</option>
-            <option>Solar Accessories</option>
-            <option>General Enquiry</option>
-          </select>
-        </div>
-        <div class="fg"><label>Property Type</label>
-          <select>
-            <option value="">Select property type...</option>
-            <option>Apartment / Flat</option>
-            <option>Duplex / Detached House</option>
-            <option>Office Building</option>
-            <option>Shop / Business Premises</option>
-            <option>Estate / Large Property</option>
-          </select>
-        </div>
-        <div class="fg"><label>Message</label><textarea placeholder="Tell us about your power needs, monthly bills, or any questions you have..."></textarea></div>
-        <button type="submit" class="fsub">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          Send Message
-        </button>
-        <div class="fsucc" id="fs">✅ Message sent! We'll contact you within 2 hours.</div>
-      </form>
+    <div class="wa-box rr">
+      <h3>Start Your Solar Journey<br/><em>on WhatsApp</em></h3>
+      <p>No forms, no waiting. Chat with our solar experts directly — get a quote, ask questions, or book your free site assessment, all on WhatsApp.</p>
+      <div class="wa-opts">
+        <a href="https://wa.me/2340000000000?text=Hi%2C%20I%27m%20interested%20in%20a%20home%20solar%20installation." class="wa-opt" target="_blank" rel="noopener"><div class="wa-opt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="wa-opt-t">Home Solar Installation</div><div class="wa-opt-s">Get a free quote for your home</div></div></a>
+        <a href="https://wa.me/2340000000000?text=Hi%2C%20I%27m%20interested%20in%20a%20commercial%20solar%20system." class="wa-opt" target="_blank" rel="noopener"><div class="wa-opt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="wa-opt-t">Office / Commercial System</div><div class="wa-opt-s">Solar for your business or estate</div></div></a>
+        <a href="https://wa.me/2340000000000?text=Hi%2C%20I%27d%20like%20to%20buy%20solar%20panels%20or%20accessories." class="wa-opt" target="_blank" rel="noopener"><div class="wa-opt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.96-1.61L23 6H6"/></svg></div><div><div class="wa-opt-t">Panels, Inverters &amp; Accessories</div><div class="wa-opt-s">Buy quality solar equipment</div></div></a>
+        <a href="https://wa.me/2340000000000?text=Hi%2C%20I%20need%20maintenance%20on%20my%20solar%20system." class="wa-opt" target="_blank" rel="noopener"><div class="wa-opt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div><div class="wa-opt-t">Maintenance &amp; Repair</div><div class="wa-opt-s">Service for existing systems</div></div></a>
+      </div>
+      <div class="wa-pulse-w">
+        <a href="https://wa.me/2340000000000" class="wa-cta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Open WhatsApp Now
+        </a>
+      </div>
+      <p class="wa-note">Typically responds within 1 hour · Mon–Sat, 8AM–6PM</p>
     </div>
   </div>
 </section>
 
-<!-- CTA SECTION -->
+<!-- CTA -->
 <section class="cta-s">
-  <div class="ctabg"></div>
-  <div class="ctaov"></div>
+  <div class="cta-orb"></div>
   <div class="c ctac r">
-    <div class="lbl" style="justify-content:center">Take the First Step</div>
+    <div class="lbl" style="justify-content:center;color:var(--sky4)">Take the First Step</div>
     <h2>Stop Paying for Electricity.<br/><em>Own Your Power.</em></h2>
-    <p>Join over 500 Lagos homes and businesses that have made the switch. A free site assessment costs you nothing — and could save you everything.</p>
+    <p>Join over 500 homes and businesses across Nigeria that have made the switch to clean, reliable solar energy.</p>
     <div class="ctas">
-      <a href="#contact" class="btn btn-gold btn-glow">Book Free Assessment</a>
-      <a href="https://wa.me/2340000000000" class="btn btn-outline" target="_blank" rel="noopener">
-        <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Chat on WhatsApp
+      <a href="https://wa.me/2340000000000" class="btn btn-wa" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Chat Us on WhatsApp
       </a>
+      <a href="#about" class="btn btn-out" style="border-color:rgba(255,255,255,.25);color:#fff">Learn More About Us</a>
     </div>
   </div>
 </section>
@@ -760,145 +802,99 @@ footer{background:#070809;padding:80px 0 0}
   <div class="c">
     <div class="fg2">
       <div>
-        <a href="#" class="logo" style="font-size:.98rem">
+        <a href="#" class="logo" style="color:#fff;font-size:.96rem">
           <div class="lm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg></div>
-          <span style="color:var(--white)">ALAN Energy<span class="ls">Renewable Energy Solutions</span></span>
+          <span>ALAN Energy<span class="ls">Renewable Energy Solutions</span></span>
         </a>
-        <p class="fbd">Delivering clean, reliable solar power to homes and businesses across Lagos. Powered by expertise. Backed by trust.</p>
-        <div class="fsoc">
-          <a href="#" class="fso" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="#" class="fso" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://wa.me/2340000000000" class="fso" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <p class="fbd">Delivering clean, reliable solar power to homes and businesses across all 36 states in Nigeria. Headquartered in Lagos. Powered by expertise. Backed by trust.</p>
+        <div class="fsocs">
+          <a href="#" class="fso"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" class="fso"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://wa.me/2340000000000" class="fso"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
         </div>
       </div>
-      <div>
-        <div class="fh">Services</div>
-        <ul class="fls">
-          <li><a href="#services">Home Installation</a></li>
-          <li><a href="#services">Office Installation</a></li>
-          <li><a href="#services">Panel Sales</a></li>
-          <li><a href="#services">Maintenance</a></li>
-          <li><a href="#services">Accessories</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fh">Company</div>
-        <ul class="fls">
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#why">Why Choose Us</a></li>
-          <li><a href="#gallery">Our Work</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="nl">
-        <div class="fh">Stay Updated</div>
-        <p>Get solar tips, energy guides and exclusive offers in your inbox. No spam, ever.</p>
-        <div class="nlf">
-          <input type="email" placeholder="Your email address"/>
-          <button type="button">Subscribe</button>
-        </div>
-      </div>
+      <div><div class="fh">Services</div><ul class="fls"><li><a href="#services">Home Installation</a></li><li><a href="#services">Office Installation</a></li><li><a href="#services">Panel Sales</a></li><li><a href="#services">Maintenance</a></li><li><a href="#services">Accessories</a></li></ul></div>
+      <div><div class="fh">Company</div><ul class="fls"><li><a href="#about">About Us</a></li><li><a href="#why">Why Choose Us</a></li><li><a href="#gallery">Our Work</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="nl"><div class="fh">Newsletter</div><p>Get solar tips, energy guides and exclusive offers. No spam, ever.</p><div class="nlf"><input type="email" placeholder="Your email address"/><button type="button">Go</button></div></div>
     </div>
     <div class="fbot">
       <p>© 2025 Alan Renewable Energy Solutions. All rights reserved.</p>
-      <p>Festac, Lagos, Nigeria &nbsp;|&nbsp; <a href="mailto:operations@alangrp.com">operations@alangrp.com</a></p>
+      <p>Festac, Lagos · Nationwide Service · <a href="mailto:operations@alangrp.com">operations@alangrp.com</a></p>
     </div>
   </div>
 </footer>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/2340000000000" class="wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <div class="wap"></div>
+<!-- WA FLOAT -->
+<a href="https://wa.me/2340000000000" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="wafp"></div><div class="wafp2"></div>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
 <script>
-/* ---- PROGRESS BAR ---- */
-const prog = document.getElementById('prog');
-window.addEventListener('scroll', () => {
-  const s = document.documentElement.scrollTop;
-  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  prog.style.width = (s / h * 100) + '%';
+/* Progress */
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;prog.style.width=(s/h*100)+'%'});
+
+/* Nav */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mob').classList.toggle('o'));
+document.querySelectorAll('.mob a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mob').classList.remove('o')));
+
+/* FLOATING CLOUDS */
+const cld=document.getElementById('clouds');
+const cloudData=[
+  {w:180,h:40,top:8,spd:55,dl:0},
+  {w:120,h:28,top:15,spd:70,dl:8},
+  {w:200,h:50,top:22,spd:45,dl:15},
+  {w:90,h:22,top:10,spd:80,dl:5},
+  {w:150,h:35,top:18,spd:60,dl:20},
+];
+cloudData.forEach(d=>{
+  const el=document.createElement('div');
+  el.className='cloud';
+  el.style.cssText=`width:${d.w}px;height:${d.h}px;top:${d.top}%;animation-duration:${d.spd}s;animation-delay:-${d.dl}s`;
+  cld.appendChild(el);
 });
 
-/* ---- NAVBAR ---- */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60));
-document.getElementById('ham').addEventListener('click', () => document.getElementById('mob').classList.toggle('o'));
-document.querySelectorAll('.mob a').forEach(a => a.addEventListener('click', () => document.getElementById('mob').classList.remove('o')));
-
-/* ---- PARTICLES ---- */
-const pts = document.getElementById('pts');
-for(let i = 0; i < 28; i++){
-  const p = document.createElement('div');
-  p.className = 'pt';
-  const size = 2 + Math.random() * 4;
-  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:${Math.random()*30}%;--d:${5+Math.random()*8}s;--dl:${Math.random()*6}s`;
-  pts.appendChild(p);
+/* BIRDS */
+const birdCont=document.getElementById('birds');
+for(let i=0;i<5;i++){
+  const b=document.createElement('div');
+  b.className='bird';
+  const top=8+Math.random()*25;
+  const spd=12+Math.random()*18;
+  const delay=-(Math.random()*20);
+  const size=10+Math.random()*12;
+  b.style.cssText=`top:${top}%;animation-duration:${spd}s;animation-delay:${delay}s`;
+  b.innerHTML=`<svg width="${size}" height="${size}" viewBox="0 0 40 20" fill="none"><path d="M0 10 Q10 0 20 10 Q30 0 40 10" stroke="rgba(10,25,41,0.35)" stroke-width="2.5" fill="none"/></svg>`;
+  birdCont.appendChild(b);
 }
 
-/* ---- SCROLL REVEAL ---- */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.r,.rl,.rr').forEach(el => obs.observe(el));
+/* REVEAL */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.r,.rl,.rr,.rs').forEach(el=>obs.observe(el));
 
-/* ---- SERVICE CARDS — spotlight effect ---- */
-document.querySelectorAll('.sv').forEach(sv => {
-  sv.addEventListener('mousemove', e => {
-    const r = sv.getBoundingClientRect();
-    sv.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-    sv.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-  });
-});
+/* SERVICE SPOTLIGHT */
+document.querySelectorAll('.sv').forEach(sv=>{sv.addEventListener('mousemove',e=>{const r=sv.getBoundingClientRect();sv.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');sv.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
 
-/* ---- FAQ ---- */
-document.querySelectorAll('.fq').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.fi');
-    const open = item.classList.contains('op');
-    document.querySelectorAll('.fi.op').forEach(i => i.classList.remove('op'));
-    if(!open) item.classList.add('op');
-  });
-});
+/* FAQ */
+document.querySelectorAll('.fq').forEach(btn=>{btn.addEventListener('click',()=>{const fi=btn.closest('.fi'),op=fi.classList.contains('op');document.querySelectorAll('.fi.op').forEach(i=>i.classList.remove('op'));if(!op)fi.classList.add('op')})});
 
-/* ---- FORM ---- */
-function handleForm(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.fsub');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('fs').style.display = 'block';
-    btn.textContent = 'Sent ✓';
-    e.target.reset();
-  }, 1100);
-}
-
-/* ---- COUNTER ANIMATION ---- */
-function countUp(el, target, suffix) {
-  let start = 0, dur = 1800;
-  const step = ts => {
-    if(!step.s) step.s = ts;
-    const p = Math.min((ts - step.s) / dur, 1);
-    el.textContent = Math.floor(p * target) + suffix;
-    if(p < 1) requestAnimationFrame(step);
-  };
+/* COUNTERS */
+function count(el,target,suf){
+  let s=0,dur=2000;
+  const step=ts=>{if(!step.s)step.s=ts;const p=Math.min((ts-step.s)/dur,1);const eased=1-Math.pow(1-p,3);el.textContent=Math.floor(eased*target)+suf;if(p<1)requestAnimationFrame(step)};
   requestAnimationFrame(step);
 }
-const statObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      const el = e.target;
-      const cnt = parseInt(el.dataset.count);
-      const suf = el.dataset.suf || '';
-      if(cnt) countUp(el, cnt, suf);
-      statObs.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('[data-count]').forEach(el => statObs.observe(el));
+const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,c=parseInt(el.dataset.count),s=el.dataset.suf||'';if(c)count(el,c,s);co.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+/* PARALLAX on hero bg photo */
+window.addEventListener('scroll',()=>{
+  const ph=document.querySelector('.hbg-photo img');
+  if(ph) ph.style.transform=`translateY(${scrollY*0.15}px)`;
+});
 </script>
 </body>
 </html>
